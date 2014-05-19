@@ -7,7 +7,7 @@ import cucumber.junit.Cucumber;
 @RunWith(Cucumber.class)
 @Cucumber.Options(
 format = {"html:target/cucumber"},
-tags = "@addproject")
+tags = "@forgotpwd")
 public class RunTest{
 
 }

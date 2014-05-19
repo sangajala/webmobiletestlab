@@ -6,6 +6,7 @@ import java.util.Random;
 import com.web.testlab.*;
 import cucumber.annotation.After;
 import cucumber.annotation.Before;
+import cucumber.annotation.en.And;
 import cucumber.annotation.en.Given;
 import cucumber.annotation.en.Then;
 import cucumber.annotation.en.When;
@@ -19,7 +20,8 @@ public class StepDefs
     static WebDriver driver;
     LoginPage loginPage;
     HomePage home;
-  AddProjectPage addProject;
+    ForgotPwdPage forgotpwdpage;
+    AddProjectPage addProject;
     String name,name1;
 
 	@Before
@@ -35,6 +37,7 @@ public class StepDefs
 
         loginPage = new LoginPage();
         home=new HomePage();
+        forgotpwdpage = new ForgotPwdPage();
         addProject=new AddProjectPage();
 
 	}
@@ -212,4 +215,78 @@ public class StepDefs
     public void Admin_should_see_an_error_message_as_Project_already_exist_(String msg) {
             Assert.assertTrue(Utils.isTextPresent(msg));
     }
+
+    @And("^Clicks on 'forgot Password' link$")
+    public void Clicks_on_forgot_Password_link() {
+
+        forgotpwdpage.click_on_forgot_password();
+
+        Utils.sleep(5);
+
     }
+
+    @Then("^Admin sees 'Which is yor favourite place' in new page$")
+    public void Admin_sees_Which_is_yor_favourite_place_in_new_page() {
+
+        Assert.assertTrue(Utils.isElementPresent(By.name("favplace")));
+
+    }
+
+
+    @When("^Admin enters  answer as '(.*)'$")
+    public void Admin_enters_answer_as_london(String favplace) {
+        forgotpwdpage.enter_answer_as_london(favplace);
+    }
+
+    @When("^Clicks on 'Go' Button$")
+    public void Clicks_on_Go_Button() {
+        forgotpwdpage.click_on_go_buton();
+        Utils.sleep(5);
+    }
+
+    @Then("^Admin should redirect to new password page$")
+    public void Admin_should_redirect_to_new_password_page() {
+        Assert.assertTrue(Utils.isElementPresent(By.name("newpassword")));
+        Assert.assertTrue(Utils.isElementPresent(By.name("confpass")));
+    }
+
+    @When("^Admin enters 'new password' as '(.*\\d+)'$")
+    public void Admin_enters_new_password_as_Tvishi_(String pwd) {
+        forgotpwdpage.enter_new_pwd(pwd);
+
+
+    }
+
+    @When("^Admin enters  'confirmpassword' as '(.*\\d+)'$")
+    public void Admin_enters_confirmpassword_as_Tvishi_(String confpass) {
+        forgotpwdpage.enter_confirmpassword(confpass);
+
+
+    }
+
+    @Then("^Admin clicks on 'save'$")
+    public void Admin_clicks_on_save() {
+        forgotpwdpage.click_on_save();
+        Utils.sleep(5);
+    }
+
+
+    @And("^Error message 'please enter correct password' should display.$")
+    public void Error_message_please_enter_correct_password_should_display() {
+        Assert.assertTrue(Utils.isElementPresent(By.id("passworderror")));
+
+    }
+
+    @Then("^Error message 'Invalid Answer' should display$")
+    public void Error_message_Invalid_Answer_should_display() {
+        Assert.assertTrue(Utils.isElementPresent(By.id("usererror")));
+    }
+
+    @When("^Admin clicks 'logout' button$")
+    public void Admin_clicks_logout_button() {
+        forgotpwdpage.click_logout();
+        Utils.sleep(5);
+    }
+
+
+}
