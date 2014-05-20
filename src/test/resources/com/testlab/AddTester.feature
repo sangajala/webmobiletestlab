@@ -1,6 +1,6 @@
 Feature: Project admin can add Tester
-As a Project admin
-I want to add Tester
+#As a Project admin
+#I want to add Tester
 
 Scenario: Project admin can add tester - Happy path
 Given Project Admin is in Project Home Page
