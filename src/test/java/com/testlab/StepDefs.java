@@ -22,6 +22,10 @@ public class StepDefs
     HomePage home;
     ForgotPwdPage forgotpwdpage;
     AddProjectPage addProject;
+    ProjectHomePage projecthomepage;
+    Testers testers;
+    AddTester addtester;
+    Random random = new Random();
     String name,name1;
 
 	@Before
@@ -39,6 +43,9 @@ public class StepDefs
         home=new HomePage();
         forgotpwdpage = new ForgotPwdPage();
         addProject=new AddProjectPage();
+        projecthomepage = new ProjectHomePage();
+        testers = new Testers();
+        addtester = new AddTester();
 
 	}
 
@@ -287,6 +294,125 @@ public class StepDefs
         forgotpwdpage.click_logout();
         Utils.sleep(5);
     }
+    @Then("^project admin is in project home page$")
+    public void project_admin_is_in_project_home_page() {
+        Assert.assertTrue(Utils.isTextPresent("Hi, projectadmin"));
+    }
 
+    @When("^project admin open the tester module$")
+    public void open_the_tester_module()  {
+        projecthomepage.clickTesterTab();
+        Utils.sleep(5);
+
+    }
+
+    @When("^Click on Add tester button$")
+    public void Click_on_Add_tester_button() {
+        testers.clickAddTesterButton();
+
+        Utils.sleep(5);
+
+    }
+
+    @Then("^the add tester page is displayed$")
+    public void the_add_tester_page_is_displayed() {
+        Assert.assertTrue(Utils.getVisibleText().contains("Add Tester"));
+    }
+
+
+    @When("^enters the '(.*)' as Fullname$")
+    public void enters_the_Testerone_as_Fullname(String Fullname) {
+
+        addtester.enterFullname(Fullname);
+    }
+
+    @When("^enters '(.*)' as username$")
+    public void enters_TestUser_as_username(String username) {
+        addtester.enterUsername(username);
+
+    }
+    @When("^enters '(.*)' as a new username$")
+    public void enters_TestUser_as_new_username(String username) {
+        username = username + String.valueOf(Math.abs(random.nextInt()));
+        addtester.enterUsername(username);
+
+    }
+
+    @When("^enters '(.*)' as password$")
+    public void enters_Password_as_password(String password)  {
+        addtester.Password(password);
+    }
+
+    @When("^enters '(.*)' as confirm password$")
+    public void enter_Password_as_confirm_password(String password) {
+        addtester.ConfirmPassword(password);
+    }
+
+    @When("^enters '(.*)' as email$")
+    public void _testuser_example_com_as_email(String email) { addtester.email(email);
+    }
+
+    @When("^enters '(.*)' as a favourite Place$")
+    public void _London_as_a_favourite_Place(String favouritePlace) {
+        addtester.FavouritePlace(favouritePlace);
+    }
+
+    @When("^saves the form$")
+    public void saves_the_form() {
+        addtester.clickSaveButton();
+
+    }
+
+    @Then("^the success message is shown as dialog$")
+    public void the_success_message_is_shown_as_dialog() {
+        Assert.assertTrue(Utils.getVisibleText().contains("Tester details saved Successfully"));
+    }
+
+    @Then("^Click on ok button$")
+    public void Click_on_ok_button() {
+        addtester.clickokButton();
+
+    }
+
+    @Then("^the user is in Tester List page$")
+    public void the_user_is_in_Tester_List_page() {
+        Assert.assertTrue(Utils.getVisibleText().contains("Testers"));
+    }
+
+    @Then("^the Error message is shown as Error$")
+    public void the_Error_message_is_shown_as_Error() {
+        Assert.assertTrue(Utils.getVisibleText().contains("Only alphanumeric characters are allowed"));
+    }
+
+    @Then("^the Error message is shown as Password mismatch$")
+    public void the_Error_message_is_shown_as_Password_mismatch() {
+        Assert.assertTrue(Utils.getVisibleText().contains("Confirm password does not match the password"));
+    }
+
+    @Then("^the Error message shown as Username already exists.$")
+    public void the_Error_message_shown_as_Username_already_exists() {
+        Assert.assertTrue(Utils.getVisibleText().contains("Username already exists."));
+    }
+
+    @When("^Click on Edit tester link for first user$")
+    public void Click_on_Edit_tester_link_for_first_user() {
+        testers.clickEditTester();
+
+    }
+
+    @Then("^the edit tester form is displayed$")
+    public void the_edit_tester_form_is_displayed() {
+        Assert.assertTrue(Utils.getVisibleText().contains("Edit Tester"));
+    }
+
+    @Then("^the success message for edit is shown as dialog$")
+    public void the_success_message_for_edit_is_shown_as_dialog() {
+        Assert.assertTrue(Utils.getVisibleText().contains("Tester details Updated Successfully"));
+    }
+
+    @Then("^user can view updated details for tester$")
+    public void user_can_view_updated_details_for_tester()  {
+        Assert.assertTrue(Utils.getVisibleText().contains("Testerone"));
+    }
 
 }
