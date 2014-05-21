@@ -33,6 +33,10 @@ public class HomePage {
     {
         driver.findElement(By.id("myTable_next")).click();
     }
-
+    public void navigateToAddProjectAdminUser()
+    {
+        driver.findElement(By.xpath("/html/body/nav/ul/li[2]/a")).click();
+        //driver.findElement((By.xpath("/html/body/div[3]/h2")));
+    }
 
 }
