@@ -34,11 +34,10 @@ public abstract class BrowserFactory
       //  WebDriver d = getDriver();
         driver=null;
 	}
-
 protected static WebDriver startRemoteWebBrowser(String browser,String URL)
 {
 
-    if(true)
+    if(false)
     {
         try
         {

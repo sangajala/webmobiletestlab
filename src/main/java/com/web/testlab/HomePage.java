@@ -29,6 +29,14 @@ public class HomePage {
         driver.findElement(By.xpath("html/body/div[2]/div[2]/a")).click();
     }
 
+    public void navigateToAddProjectAdminUser()
+    {
+        driver.findElement(By.xpath("/html/body/nav/ul/li[2]/a")).click();
+        Utils.sleep(5);
+        driver.findElement((By.xpath("/html/body/div[2]/div[2]/a"))).click();
+        Utils.sleep(5);
+    }
+
     public void goToNextPage()
     {
         driver.findElement(By.id("myTable_next")).click();

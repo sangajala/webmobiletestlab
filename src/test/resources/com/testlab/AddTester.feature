@@ -1,4 +1,5 @@
 Feature: Project admin can add tester
+
   @AddTester
   Scenario:Project admin can add tester - Happy path
     Given Admin is in login page
