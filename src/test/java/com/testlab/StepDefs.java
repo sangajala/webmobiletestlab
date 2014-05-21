@@ -10,7 +10,6 @@ import cucumber.annotation.en.And;
 import cucumber.annotation.en.Given;
 import cucumber.annotation.en.Then;
 import cucumber.annotation.en.When;
-import cucumber.runtime.PendingException;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -288,82 +287,6 @@ public class StepDefs
         forgotpwdpage.click_logout();
         Utils.sleep(5);
     }
-// Add Project Admin User by Super User - ---- Bharathi
 
 
-    @Given("^User is on the 'Add Project Admin' Page logged in with '(.*)' as username and '(.*)' as password$")
-    public void User_is_on_the_Add_Project_Admin_Page_logged_in_with_testlabadmin_as_username_and_admin_as_password(String uname,String pwd) {
-        loginPage.enterUsername(uname);
-        loginPage.enterPassword(pwd);
-        loginPage.clickLoginButton();
-        Utils.sleep(5);
-        System.out.println("going to navigate");
-        hpage.navigateToAddProjectAdminUser();
-        Assert.assertTrue(Utils.isElementPresent(By.xpath("/html/body/div[3]/h2")));
-    }
-
-    @When("^the User enters the Valid data in all the fields$")
-    public void the_User_enters_the_Valid_data_in_all_the_fields()  {
-
-        fullname="James"+new Random().nextInt(100);
-        uname = "jack"+new Random().nextInt(100);
-        pwd = "Kate12";
-        confpwd = "Kate12";
-        email = "james02@gmail.co.uk";
-        favplace = "london";
-        project="testlab";
-
-        addprojectadminpage.enterProjectAdmins(fullname,uname,pwd,confpwd,email,favplace,project);
-
-    }
-
-    @And("^User Clicks the 'Save ' button$")
-    public void User_Clicks_the_Save_button(){
-        addprojectadminpage.saveProjectAdmins();
-    }
-
-    @Then("^User Should see the message dialog box 'Project Admin User details saved Successfully'$")
-    public void User_Should_see_the_message_dialog_box_Project_Admin_User_details_saved_Successfully() {
-        Assert.assertTrue(Utils.isElementPresent(By.xpath(".//*[@id='success_dialog']/div/div/div/button")));
-    }
-
-    @When("^User clicks 'Ok' button in the message dialog box$")
-    public void User_clicks_Ok_button_in_the_message_dialog_box(){
-        addprojectadminpage.clikok();
-    }
-
-    @And("^User can see the newly added user in the 'Project Admin User ' Lists in the home page under the 'users' tab$")
-    public void User_can_see_the_newly_added_user_in_the_Project_Admin_User_Lists_in_the_home_page_under_the_users_tab() {
-        Utils.sleep(5);
-
-        for (int i = 0; i < 10; i++) {
-            Utils.sleep(5);
-            if(Utils.isTextPresent((fullname)))
-                break;
-            hpage.goToNextPage();
-        }
-        Utils.sleep(5);
-        Assert.assertTrue(Utils.isTextPresent(uname));
-
-    }
-
-
-    @When("^User does not enter the mandatory fields$")
-    public void User_does_not_enter_the_mandatory_fields()  {
-        hpage.navigateToAddProjectAdminUser();
-        Utils.sleep(5);
-    }
-
-    @And("^User clicks 'Save' button$")
-    public void User_clicks_Save_button() {
-        addprojectadminpage.saveProjectAdmins();
-    }
-
-    @Then("^User should see a message ' Please enter all the mandatory fields'$")
-    public void User_should_see_a_message_Please_enter_all_the_mandatory_fields() {
-        Assert.assertTrue(Utils.isTextPresent("Please enter all the mandatory fields"));
-    }
-     // Add project admin user code completed -- bharathi
-
-}
 }

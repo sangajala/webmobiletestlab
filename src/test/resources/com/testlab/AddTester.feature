@@ -1,89 +1,104 @@
-Feature: Project admin can add Tester
-As a Project admin
-I want to add Tester
-
-Scenario: Project admin can add tester - Happy path
-Given Project Admin is in Project Home Page
-When opens the user module
-And Click on Add tester button
-Then the Add Tester page is displayed
-When enters the full name as 'Tester One'
-And enters the full name as 'TestUser'
-And enters the password as 'Password12'
-And enters the confirm password as 'Password12'
-And email as 'testuser@example.com'
-And saves the form
-Then the success message is shown as dialog
-And the user is in Tester List page
-
-Scenario Outline: Project admin cannot add tester with invalid data
-
-Given Project Admin is in Project Home Page
-When opens the user module
-And Click on Add tester button
-Then the Add Tester page is displayed
-When enters the full name as '<full name>'
-And enters the full name as '<Username>'
-And enters the password as '<Password>'
-And enters the confirm password as '<Password>'
-And email as '<email>'
-And saves the form
-Then the success message <ErrorMessage>
-And the user is in Add Tester Page
-
-Examples:
-    |full name|Username         |Password|      ErrorMessage|Email|
-    |testfulname|Name|Pword|Not a valid user|test@trest.com|
-    |testfulname|$%$Name|Pword$%$%|Not a valid user|test@trest.com|
-    |test fulname| | |please enter valid Username and Passord|test@trest.com|
-    |test fulname|  |ValidPass@123|please enter valid Username|test@trest.com|
-    |testfulname|Validuser| |please enter valid Passord|test@trest.com|
-    ||Name|Pword|Not a valid fullname|test@trest.com|
-    |*@£*&(£|Name|Pword|Not a valid user|test@trest.com|
-    |testfulname|Name|Pword|Not a email|test|
-    |testfulname|Name|Pword|Not a email|test@|
-    |testfulname|Name|Pword|Not a email|test@tt|
-    |testfulname|Name|Pword|Not a email|testtt.c|
-    
-    
-     Scenario Outline: Project admin cannot add tester with diff passwords
-    Given Project Admin is in Project Home Page
-    When opens the user module
+Feature: Project admin can add tester
+  @AddTester
+  Scenario:Project admin can add tester - Happy path
+    Given Admin is in login page
+    When Admin enters 'projectadmin' as username
+    And  Admin enters 'Admin1' as password
+    And  Admin clicks on 'login' button
+    Then Admin should login successfully
+    And project admin is in project home page
+    When project admin open the tester module
     And Click on Add tester button
-    Then the Add Tester page is displayed
-    When enters the full name as '<full name>'
-    And enters the full name as '<Username>'
-    And enters the password as '<Password>'
-    And enters the confirm password as 'Password1'
-    And email as '<email>'
+    Then the add tester page is displayed
+    When enters the 'Fullname' as Fullname
+    And enters 'Username' as a new username
+    And enters 'Password12' as password
+    And enters 'Password12' as confirm password
+    And enters 'testuser@example.com' as email
+    And enters 'London' as a favourite Place
     And saves the form
-    Then the success message <ErrorMessage>
-    And the user is in Add Tester Page
+    Then the success message is shown as dialog
+    And Click on ok button
+    And the user is in Tester List page
 
-    Examples:
-        |full name|Username         |Password|      ErrorMessage|Email|
-        |testfulname|Name|Pword|Not a valid user|test@trest.com|
-        
- 
-          Scenario: Project admin cannot add tester with existing
-           Given Project Admin is in Project Home Page
-           When opens the user module
-           And Click on Add tester button
-           Then the Add Tester page is displayed
-           When enters the full name as 'Tester One'
-           And enters the full name as 'TestUser'
-           And enters the password as 'Password12'
-           And enters the confirm password as 'Password12'
-           And email as 'testuser@example.com'
-           And saves the form
-           Then the success message is shown as dialog
-           And the user is in Tester List page
-           And Click on Add tester button
-          Then the Add Tester page is displayed
-          When enters the full name as 'Tester One'
-          And enters the full name as 'TestUser'
-          And enters the password as 'Password12'
-          And enters the confirm password as 'Password12'
-          And email as 'testuser@example.com'
-          And saves the form
-          Then the message shows that the user is already added
+
+  Scenario Outline:Project admin cannot add tester with invalid data
+    Given Admin is in login page
+    When Admin enters 'projectadmin' as username
+    And  Admin enters 'Admin1' as password
+    And  Admin clicks on 'login' button
+    Then Admin should login successfully
+    And project admin is in project home page
+    When project admin open the tester module
+    And Click on Add tester button
+    Then the add tester page is displayed
+    When enters the '<Fullname>' as Fullname
+    And enters '<username>' as username
+    And enters '<Password>' as password
+    And enters '<Password1>' as confirm password
+    And enters '<email>' as email
+    And enters '<Favourite Place>' as a favourite Place
+    And saves the form
+    Then '<Error Message>' should be displayed
+
+  Examples:
+    |Fullname|username|Password|Password1|email|Favourite Place|Error Message|
+    |@@Raj |raj123|Password1|password|raj12@test.com|pune    |Only alphanumeric characters are allowed|
+    #|Raj |raj |Password1|password|raj12@test.com|pune  |atleast minimum of 6 alphanumeric characters are allowed|
+
+
+  Scenario Outline: Project admin cannot add tester with diff passwords
+    Given Admin is in login page
+    When Admin enters 'projectadmin' as username
+    And  Admin enters 'Admin1' as password
+    And  Admin clicks on 'login' button
+    Then Admin should login successfully
+    And project admin is in project home page
+    When project admin open the tester module
+    And Click on Add tester button
+    Then the add tester page is displayed
+    When enters the '<Fullname>' as Fullname
+    And enters '<username>' as username
+    And enters '<Password>' as password
+    And enters '<Password1>' as confirm password
+    And enters '<email>' as email
+    And enters '<Favourite Place>' as a favourite Place
+    And saves the form
+    Then '<Error Message>' should be displayed
+    #Then the add tester page is displayed
+
+  Examples:
+    |Fullname|username|Password|Password1|email|Favourite Place|Error Message|
+    |Raj |raj123|Password1|password|raj12@test.com|pune    |Confirm password does not match the password|
+
+
+  Scenario: Project admin cannot add tester with existing  user
+    Given Admin is in login page
+    When Admin enters 'projectadmin' as username
+    And Admin enters 'Admin1' as password
+    And Admin clicks on 'login' button
+    Then Admin should login successfully
+    And project admin is in project home page
+    When project admin open the tester module
+    And Click on Add tester button
+    Then the add tester page is displayed
+    When enters the 'Testerone' as Fullname
+    And enters 'TestUser' as a new username
+    And enters 'Password12' as password
+    And enters 'Password12' as confirm password
+    And enters 'testuser@example.com' as email
+    And enters 'London' as a favourite Place
+    And saves the form
+    Then the success message is shown as dialog
+    And Click on ok button
+    And the user is in Tester List page
+    And Click on Add tester button
+    Then the add tester page is displayed
+    When enters the 'Testerone' as Fullname
+    And enters 'TestUser' as username
+    And enters 'Password12' as password
+    And enters 'Password12' as confirm password
+    And enters 'testuser@example.com' as email
+    And enters 'London' as a favourite Place
+    And saves the form
+    Then the Error message shown as Username already exists.
