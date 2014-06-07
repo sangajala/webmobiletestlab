@@ -1,4 +1,4 @@
-@addadmin
+@addadmin@issues
 Feature: Super Admin can Add Project admins 
 #As a Super Admin
 #I want to Add Project Admins

@@ -1,4 +1,4 @@
-@forgotpwd
+@forgotpwd@issues
 Feature: Admin can change the password by clicking forgot password
 
   Scenario:Admin uses Forgot your password link when admin forgots password.

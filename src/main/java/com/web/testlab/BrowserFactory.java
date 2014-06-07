@@ -15,7 +15,7 @@ public abstract class BrowserFactory
 		
 	public static WebDriver StartBrowser(String Browser,String URL) throws MalformedURLException, InterruptedException 
 	{
-        if(driver==null)
+        if(driver==null||((FirefoxDriver) driver).getSessionId()==null)
         {
          driver = startRemoteWebBrowser(Browser,URL);
         }
