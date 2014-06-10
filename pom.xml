@@ -12,7 +12,9 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+      <!--<testsdsd>${myProp}</testsdsd>-->
   </properties>
+
 
   <dependencies>
       <dependency>

@@ -1,4 +1,5 @@
 package com.web.testlab;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -15,7 +16,7 @@ public abstract class BrowserFactory
 		
 	public static WebDriver StartBrowser(String Browser,String URL) throws MalformedURLException, InterruptedException 
 	{
-        if(driver==null||((FirefoxDriver) driver).getSessionId()==null)
+        if(driver==null||!isSessionActive())
         {
          driver = startRemoteWebBrowser(Browser,URL);
         }
@@ -28,6 +29,21 @@ public abstract class BrowserFactory
             return driver;
         }
 
+        public static boolean isSessionActive()
+        {
+            try {
+
+                return driver.findElements(By.tagName("body")).size()>0;
+
+            }
+            catch(Exception e)
+            {
+
+            }
+            return false;
+        }
+
+
 	public static void QuitBrowser() 
 	{
 //		getDriver().quit();
@@ -37,7 +53,7 @@ public abstract class BrowserFactory
 protected static WebDriver startRemoteWebBrowser(String browser,String URL)
 {
 
-    if(false)
+    if(true)
     {
         try
         {
@@ -45,10 +61,10 @@ protected static WebDriver startRemoteWebBrowser(String browser,String URL)
            System.setProperty("webdriver.chrome.driver", "/Users/sriramangajala/Documents/Automation/chromedriver");
             //  driver=new ChromeDriver();
         	System.out.println("grid started...");
-        	DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+        	DesiredCapabilities capabilities = DesiredCapabilities.firefox();
         	capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
-        	capabilities.setCapability("platform", "Windows XP");
-        	capabilities.setCapability("version", "33");
+        	//capabilities.setCapability("platform", "Windows XP");
+        	//capabilities.setCapability("version", "33");
 			/*DesiredCapabilities capabilities = DesiredCapabilities.firefox();
 			capabilities.setCapability("version", "17");
 			capabilities.setCapability("platform", Platform.XP);*/
@@ -58,6 +74,7 @@ protected static WebDriver startRemoteWebBrowser(String browser,String URL)
 			driver = new RemoteWebDriver(
 //					new URL("http://127.0.0.1:4444/wd/hub"),
 //					capabilities);
+                  //  new URL("http://ctji4eDhjyhlSItJ839igchsEAihFSOH:bYQ52jdcIlnqTH0RAZ0H270wy9E4RjCT@8FY4K0546DEXW8MC.gridlastic.com:80/wd/hub"),
 					new URL("http://cb_ram-core:2c259106-416c-4890-9e0a-9f09ccb96c74@ondemand.saucelabs.com:80/wd/hub"),
 					capabilities);
            // return driver;
