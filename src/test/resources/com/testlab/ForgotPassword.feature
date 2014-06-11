@@ -1,4 +1,4 @@
-@forgotpwd@issues
+@forgotpwd
 Feature: Admin can change the password by clicking forgot password
 
   Scenario:Admin uses Forgot your password link when admin forgots password.
@@ -63,3 +63,16 @@ Feature: Admin can change the password by clicking forgot password
     Then Admin should login successfully
     And  Admin should see 'Welcome Admin' text message,dashboard.
 
+Scenario: Resetting the Old password
+  Given Admin is in login page
+  When Admin enters 'testlabadmin' as username
+  And Clicks on 'forgot Password' link
+  Then Admin sees 'Which is yor favourite place' in new page
+  When Admin enters  answer as 'london'
+  And Clicks on 'Go' Button
+  Then Admin should redirect to new password page
+  When Admin enters 'new password' as 'Admin1'
+  And Admin enters  'confirmpassword' as 'Admin1'
+  Then Admin clicks on 'save'
+  Then Admin should login successfully
+  And  Admin should see 'Welcome Admin' text message,dashboard.

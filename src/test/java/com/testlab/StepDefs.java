@@ -26,7 +26,8 @@ public class StepDefs
     Testers testers;
     AddTester addtester;
     Random random = new Random();
-    String name,name1;
+    String name1;
+    public static String name;
 
 	@Before
 	public void StartBrowser() throws MalformedURLException, InterruptedException
@@ -103,7 +104,7 @@ public class StepDefs
     @Given("^Admin is logged in$")
     public void Admin_is_logged_in() {
         loginPage.enterUsername("testlabadmin");
-        loginPage.enterPassword("admin");
+        loginPage.enterPassword("Admin1");
         loginPage.clickLoginButton();
         Utils.sleep(5);
         Assert.assertTrue(Utils.isTextPresent("Hi, superadmin"));
@@ -154,9 +155,9 @@ public class StepDefs
     @Given("^Admin is on the 'Add Project' Page$")
     public void Admin_is_on_the_Add_Project_Page() {
         loginPage.enterUsername("testlabadmin");
-        loginPage.enterPassword("admin");
+        loginPage.enterPassword("Admin1");
         loginPage.clickLoginButton();
-
+        Utils.sleep(5);
         //   Assert.assertTrue(Utils.isTextPresent("Add project"));
         home.navigateToAddProject();
 
@@ -207,7 +208,9 @@ public class StepDefs
     @When("^Admin enters an existing project name in the 'Project Name' textbox$")
     public void Admin_enters_an_existing_project_name_in_the_Project_Name_textbox() {
         Utils.sleep(5);
-        name1="123Banking";
+        //name1="123Banking";
+        System.out.println(name);
+        name1 = name;
         addProject.enterProjectname(name1);
 
     }
@@ -396,7 +399,9 @@ public class StepDefs
 
     @When("^Click on Edit tester link for first user$")
     public void Click_on_Edit_tester_link_for_first_user() {
+
         testers.clickEditTester();
+
 
     }
 

@@ -25,8 +25,9 @@ public class HomePage {
     {
 
         Utils.sleep(5);
-        //  driver.findElement(By.cssSelector("Add project")).click();
-        driver.findElement(By.xpath("html/body/div[2]/div[2]/a")).click();
+          //driver.findElement(By.xpath("html/body/div[2]/div[2]/a")).click();
+
+        driver.findElement(By.linkText("Add project")).click();
     }
 
     public void navigateToAddProjectAdminUser()

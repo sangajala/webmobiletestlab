@@ -1,11 +1,11 @@
-@addproject@issues
+@addproject
 Feature: Add Project as Super Admin
 #As a Super Admin
 #I want see Add Project button
 #So that I can Add Project
 Scenario: User should Navigate to the 'Add Project' Page by  logging in as Super Admin
 Given Admin is in login page
-When Admin enters 'projectAdmin' as username
+When Admin enters 'testlabadmin' as username
 And Admin enters 'Admin1' as password
 And Admin clicks on 'login' button
 Then Admin should login successfully
