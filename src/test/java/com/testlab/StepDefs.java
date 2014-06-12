@@ -340,7 +340,11 @@ public class StepDefs
         addtester.enterUsername(username);
 
     }
-
+    @When("^edits '(.*)' as a new username$")
+    public void edits_username_as_a_new_username(String username)
+    {
+        addtester.enterUsername(username);
+    }
     @When("^enters '(.*)' as password$")
     public void enters_Password_as_password(String password)  {
         addtester.Password(password);

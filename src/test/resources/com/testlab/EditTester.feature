@@ -1,4 +1,4 @@
-@Tester@issues
+@Edittester
 Feature: Project admin can edit tester
 
   Scenario:Project admin can edit tester - Happy path
@@ -34,7 +34,7 @@ Feature: Project admin can edit tester
     And the user is in Tester List page
     When Click on Edit tester link for first user
     Then the edit tester form is displayed
-    When enters '.uk' as email
+    When enters 'testermail@example.uk' as email
     And saves the form
     Then the success message for edit is shown as dialog
     And Click on ok button
@@ -61,7 +61,7 @@ Feature: Project admin can edit tester
     And Click on Edit tester link for first user
     Then the edit tester form is displayed
     When enters the '<full name>' as Fullname
-    And enters '<Username>' as a new username
+    And edits '<Username>' as a new username
     And enters '<Password>' as password
     And enters '<Password>' as confirm password
     And enters '<Email>' as email
@@ -71,16 +71,23 @@ Feature: Project admin can edit tester
     And the edit tester form is displayed
 
   Examples:
-    |full name|Username         |Password|      ErrorMessage|Email|
-    |testfulname|Name|Pword|atleast minimum of 6 alphanumeric characters are allowed|test@trest.com|
-    |testfulname|$%$Name|Pword$%$%|Only alphanumeric characters are allowed|test@trest.com|
-    |test fulname| | |Please enter all the mandatory fields|test@trest.com|
-    |test fulname|  |ValidPass@123|Please enter all the mandatory fields|test@trest.com|
-    |testfulname|Validuser| |Please enter all the mandatory fields|test@trest.com|
-    ||Name|Pword|Please enter all the mandatory fields|test@trest.com|
-    |*@�*&(�|Name|Pword|Only alphanumeric characters are allowed|test@trest.com|
-    |testfulname|Name1212|Pword121212|Invalid Email Address|testtt.c|
+    |full name|Username|Password|Password|Email|ErrorMessage|
+    ||$$$Name|Pword12|Pword12|test@trest.com|Please enter all the mandatory fields|
+    |testone$&|%$^name|Pword|Pword|test@trest.com|Only alphanumeric characters are allowed|
+    |testmandatory| | | |test@trest.com|Please enter all the mandatory fields|
 
+#  Examples:
+#    |full name|Username         |Password|      ErrorMessage|Email|
+#    |testfulname|Name|Pword|atleast minimum of 6 alphanumeric characters are allowed|test@trest.com|
+#    |testfulname|$%$Name|Pword$%$%|Only alphanumeric characters are allowed|test@trest.com|
+#    |test fulname| | |Please enter all the mandatory fields|test@trest.com|
+#    |test fulname|  |ValidPass@123|Please enter all the mandatory fields|test@trest.com|
+#    |testfulname|Validuser| |Please enter all the mandatory fields|test@trest.com|
+#    ||Name|Pword|Please enter all the mandatory fields|test@trest.com|
+#    |*@�*&(�|Name|Pword|Only alphanumeric characters are allowed|test@trest.com|
+#    |testfulname|Name1212|Pword121212|Invalid Email Address|testtt.c|
+
+#
 
   Scenario:Project admin can not edit tester with different passwords
 
