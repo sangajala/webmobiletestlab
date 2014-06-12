@@ -9,26 +9,33 @@ import org.openqa.selenium.WebDriver;
 public class AddTester {
     WebDriver driver = BrowserFactory.getDriver();
 
-    public void enterFullname(String fullname) { driver.findElement(By.name("fulnme")).sendKeys(fullname);
+    public void enterFullname(String fullname) {
+        driver.findElement(By.name("fulnme")).clear();
+                driver.findElement(By.name("fulnme")).sendKeys(fullname);
     }
 
     public void enterUsername(String username) {
+        driver.findElement(By.id("usrnme")).clear();
         driver.findElement(By.id("usrnme")).sendKeys(username);
     }
 
     public void Password(String password) {
+        driver.findElement(By.name("pass")).clear();
         driver.findElement(By.name("pass")).sendKeys(password);
     }
 
     public void ConfirmPassword(String password) {
+        driver.findElement(By.name("cpass")).clear();
         driver.findElement(By.name("cpass")).sendKeys(password);
     }
 
     public void email(String email) {
+        driver.findElement(By.id("email")).clear();
         driver.findElement(By.id("email")).sendKeys(email);
     }
 
     public void FavouritePlace(String FavouritePlace) {
+        driver.findElement(By.id("favplace")).clear();
         driver.findElement(By.id("favplace")).sendKeys(FavouritePlace);}
 
     public void clickSaveButton() { driver.findElement(By.xpath("//*[@id=\"createtester\"]/div/button[2]")).click();
