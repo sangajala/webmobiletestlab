@@ -9,6 +9,7 @@ public class AddProjectAdminPage {
 
         public void enterProjectAdmins(String fullname,String uname,String pwd,String confpwd,String email,String favplace,String project)
         {
+            Utils.sleep(5);
             driver.findElement(By.id("fulnme")).sendKeys(fullname);
             driver.findElement(By.id("usrnme")).sendKeys(uname);
             driver.findElement(By.id("pass")).sendKeys(pwd);

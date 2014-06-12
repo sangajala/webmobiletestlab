@@ -34,7 +34,7 @@ public class HomePage {
     {
         driver.findElement(By.xpath("/html/body/nav/ul/li[2]/a")).click();
         Utils.sleep(5);
-        driver.findElement((By.xpath("/html/body/div[2]/div[2]/a"))).click();
+        driver.findElement((By.linkText("Add project admin"))).click();
         Utils.sleep(5);
     }
 
