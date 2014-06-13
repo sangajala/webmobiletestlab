@@ -15,8 +15,7 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class StepDefs
-{
+public class StepDefs {
 
     static WebDriver driver;
     LoginPage loginPage;
@@ -30,38 +29,35 @@ public class StepDefs
     Random random = new Random();
     String name1;
     public static String name;
-    String fullname,uname,pwd,confpwd,email,favplace,project;
+    String fullname, uname, pwd, confpwd, email, favplace, project;
 
-	@Before
-	public void StartBrowser() throws MalformedURLException, InterruptedException
-	{	
-		try 
-		{
-		BrowserFactory.StartBrowser("firefox", "http://tvishitech.com/webdev/testlab/web/index.php");
-		driver = BrowserFactory.driver;
+    @Before
+    public void StartBrowser() throws MalformedURLException, InterruptedException {
+        try {
+            BrowserFactory.StartBrowser("firefox", "http://tvishitech.com/webdev/testlab/web/index.php");
+            driver = BrowserFactory.driver;
         } catch (Exception e) {
-			e.printStackTrace();
-		}
+            e.printStackTrace();
+        }
 
         loginPage = new LoginPage();
-        home=new HomePage();
+        home = new HomePage();
         forgotpwdpage = new ForgotPwdPage();
-        addProject=new AddProjectPage();
+        addProject = new AddProjectPage();
         projecthomepage = new ProjectHomePage();
         addprojectadminpage = new AddProjectAdminPage();
         testers = new Testers();
         addtester = new AddTester();
 
-	}
+    }
 
-	@After
-	public void closeBrowser() throws MalformedURLException, InterruptedException
-	{
+    @After
+    public void closeBrowser() throws MalformedURLException, InterruptedException {
 
-		driver.quit();
+        driver.quit();
         //.QuitBrowser();
 
-	}
+    }
 
     @Given("^Admin is in login page$")
     public void Admin_is_in_login_page() {
@@ -100,8 +96,7 @@ public class StepDefs
 
 
     @Then("^'(.*)' should be displayed$")
-    public void error_message(String error)
-    {
+    public void error_message(String error) {
         Assert.assertTrue(Utils.isTextPresent(error));
     }
 
@@ -132,6 +127,7 @@ public class StepDefs
         Utils.sleep(5);
         Assert.assertTrue(Utils.getVisibleText().contains("WEB LOGIN"));
     }
+
     @Then("^Admin should see the tabs 'Projects','Project Admins'$")
     public void Admin_should_see_the_tabs_Projects_Project_Admins() {
         Utils.sleep(5);
@@ -156,6 +152,7 @@ public class StepDefs
         Utils.sleep(5);
         Assert.assertTrue(Utils.isTextPresent("Add Project"));
     }
+
     @Given("^Admin is on the 'Add Project' Page$")
     public void Admin_is_on_the_Add_Project_Page() {
         loginPage.enterUsername("testlabadmin");
@@ -170,11 +167,12 @@ public class StepDefs
     @When("^Admin enters an new Project  with valid 'Project name' and valid 'Project Desc'$")
     public void Admin_enters_an_new_Project_with_valid_Project_name_and_valid_Project_Desc() {
         Utils.sleep(5);
-        name="Manual Testing"+new Random().nextInt(100);
+        name = "Manual Testing" + new Random().nextInt(100);
         addProject.enterProjectname(name);
         addProject.enterProjectDesc("Manual Testing");
 
     }
+
     @When("^Admin should click on 'Save' button$")
     public void Admin_should_click_on_Save_button() {
         addProject.clickSaveButton();
@@ -191,24 +189,26 @@ public class StepDefs
 
     @When("^Admin clicks on 'Ok' button$")
     public void Admin_clicks_on_Ok_button() {
-       // driver.findElement(By.tagName("button")).click();
+        // driver.findElement(By.tagName("button")).click();
         Utils.sleep(5);
         //Assert.assertTrue(Utils.isElementPresent(By.cssSelector("div.title_content > div.buttons")));
         driver.findElement(By.cssSelector("div.title_content > div.buttons > button[type=\"button\"]")).click();
-            }
+    }
+
     @Then("^Admin should see the 'Home Page' with the new project added in the 'Projects Tab'$")
     public void Admin_should_see_the_Home_Page_with_the_new_project_added_in_the_Projects_Tab() {
         Utils.sleep(5);
 
         for (int i = 0; i < 10; i++) {
             Utils.sleep(5);
-            if(Utils.isTextPresent((name)))
-            break;
+            if (Utils.isTextPresent((name)))
+                break;
             home.goToNextPage();
         }
 //        driver.findElement(By.linkText("Projects")).click();
 
     }
+
     @When("^Admin enters an existing project name in the 'Project Name' textbox$")
     public void Admin_enters_an_existing_project_name_in_the_Project_Name_textbox() {
         Utils.sleep(5);
@@ -221,13 +221,13 @@ public class StepDefs
 
     @When("^Admin enters valid description in the 'Project Desc' textbox$")
     public void Admin_enters_valid_description_in_the_Project_Desc_textbox() {
-       addProject.enterProjectDesc("Manual Testing");
+        addProject.enterProjectDesc("Manual Testing");
         Utils.sleep(5);
     }
 
-        @Then("^Admin should see an error message as '(.*)'$")
+    @Then("^Admin should see an error message as '(.*)'$")
     public void Admin_should_see_an_error_message_as_Project_already_exist_(String msg) {
-            Assert.assertTrue(Utils.isTextPresent(msg));
+        Assert.assertTrue(Utils.isTextPresent(msg));
     }
 
     @And("^Clicks on 'forgot Password' link$")
@@ -301,13 +301,14 @@ public class StepDefs
         forgotpwdpage.click_logout();
         Utils.sleep(5);
     }
+
     @Then("^project admin is in project home page$")
     public void project_admin_is_in_project_home_page() {
         Assert.assertTrue(Utils.isTextPresent("Hi, ProjectAdmin"));
     }
 
     @When("^project admin open the tester module$")
-    public void open_the_tester_module()  {
+    public void open_the_tester_module() {
         projecthomepage.clickTesterTab();
         Utils.sleep(5);
 
@@ -338,19 +339,21 @@ public class StepDefs
         addtester.enterUsername(username);
 
     }
+
     @When("^enters '(.*)' as a new username$")
     public void enters_TestUser_as_new_username(String username) {
         username = username + String.valueOf(Math.abs(random.nextInt()));
         addtester.enterUsername(username);
 
     }
+
     @When("^edits '(.*)' as a new username$")
-    public void edits_username_as_a_new_username(String username)
-    {
+    public void edits_username_as_a_new_username(String username) {
         addtester.enterUsername(username);
     }
+
     @When("^enters '(.*)' as password$")
-    public void enters_Password_as_password(String password)  {
+    public void enters_Password_as_password(String password) {
         addtester.Password(password);
     }
 
@@ -360,7 +363,8 @@ public class StepDefs
     }
 
     @When("^enters '(.*)' as email$")
-    public void _testuser_example_com_as_email(String email) { addtester.email(email);
+    public void _testuser_example_com_as_email(String email) {
+        addtester.email(email);
     }
 
     @When("^enters '(.*)' as a favourite Place$")
@@ -424,7 +428,7 @@ public class StepDefs
     }
 
     @Then("^user can view updated details for tester$")
-    public void user_can_view_updated_details_for_tester()  {
+    public void user_can_view_updated_details_for_tester() {
         Assert.assertTrue(Utils.getVisibleText().contains("Testerone"));
     }
 
@@ -434,14 +438,11 @@ public class StepDefs
     }
 
 
-
-
-
     // Add Project Admin User by Super User - ---- Bharathi
 
 
     @Given("^User is on the 'Add Project Admin' Page logged in with '(.*)' as username and '(.*)' as password$")
-    public void User_is_on_the_Add_Project_Admin_Page_logged_in_with_testlabadmin_as_username_and_Admin1_as_password(String uname,String pwd) {
+    public void User_is_on_the_Add_Project_Admin_Page_logged_in_with_testlabadmin_as_username_and_Admin1_as_password(String uname, String pwd) {
         loginPage.enterUsername(uname);
         loginPage.enterPassword(pwd);
         loginPage.clickLoginButton();
@@ -451,21 +452,21 @@ public class StepDefs
     }
 
     @When("^the User enters the Valid data in all the fields$")
-    public void the_User_enters_the_Valid_data_in_all_the_fields()  {
+    public void the_User_enters_the_Valid_data_in_all_the_fields() {
 
-       fullname="James"+new Random().nextInt(100);
-        uname = "jack"+new Random().nextInt(100);
+        fullname = "James" + new Random().nextInt(100);
+        uname = "jack" + new Random().nextInt(100);
         pwd = "Kate12";
         confpwd = "Kate12";
         email = "james02@gmail.co.uk";
         favplace = "london";
-        project="testlab";
-        addprojectadminpage.enterProjectAdmins(fullname,uname,pwd,confpwd,email,favplace,project);
+        project = "testlab";
+        addprojectadminpage.enterProjectAdmins(fullname, uname, pwd, confpwd, email, favplace, project);
 
     }
 
     @And("^User Clicks the 'Save ' button$")
-    public void User_Clicks_the_Save_button(){
+    public void User_Clicks_the_Save_button() {
         addprojectadminpage.saveProjectAdmins();
     }
 
@@ -475,7 +476,7 @@ public class StepDefs
     }
 
     @When("^User clicks 'Ok' button in the message dialog box$")
-    public void User_clicks_Ok_button_in_the_message_dialog_box(){
+    public void User_clicks_Ok_button_in_the_message_dialog_box() {
         addprojectadminpage.clikok();
     }
 
@@ -485,7 +486,7 @@ public class StepDefs
 
         for (int i = 0; i < 10; i++) {
             Utils.sleep(5);
-            if(Utils.isTextPresent((fullname)))
+            if (Utils.isTextPresent((fullname)))
                 break;
             home.goToNextPage();
 
@@ -494,7 +495,7 @@ public class StepDefs
     }
 
     @When("^User does not enter the mandatory fields$")
-    public void User_does_not_enter_the_mandatory_fields()  {
+    public void User_does_not_enter_the_mandatory_fields() {
         home.navigateToAddProjectAdminUser();
         Utils.sleep(5);
     }
@@ -517,19 +518,58 @@ public class StepDefs
 //    }
 
     @When("^User enters '(.*)','(.*)','(.*)','(.*)','(.*)','(.*)','(.*)' as invalid details$")
-    public void User_enters_fullname_Username_Password_Confirmpassword_Email_favouriteplace_Project_as_invalid_details(String fullname,String uname,String pwd,String confpwd,String email,String favplace,String project)
-    {
-        addprojectadminpage.enterProjectAdmins(fullname,uname,pwd,confpwd,email,favplace,project);
+    public void User_enters_fullname_Username_Password_Confirmpassword_Email_favouriteplace_Project_as_invalid_details(String fullname, String uname, String pwd, String confpwd, String email, String favplace, String project) {
+        addprojectadminpage.enterProjectAdmins(fullname, uname, pwd, confpwd, email, favplace, project);
 
 
     }
-//    @Then("^'(.*)' should be displayed")
-//            public void Error_Message_should_be_displayed(String error)
-//
-//    {
-//        System.out.println("into then statement");
-//        Assert.assertTrue(Utils.isTextPresent(error));
-//    }
+
+
+    //smitha
+    @Given("^Admin is on the 'Add Project Admins ' Page$")
+    public void Admin_is_on_the_Add_Project_Admins_Page() {
+        loginPage.enterUsername("testlabadmin");
+        loginPage.enterPassword("Admin1");
+        loginPage.clickLoginButton();
+        Utils.sleep(5);
+        //   Assert.assertTrue(Utils.isTextPresent("Add project"));
+        home.navigateToAddProjectAdminUser();
+    }
+
+    @Then("^user navigate to project admins list page$")
+    public void user_navigate_to_project_admins_list_page() {
+        Assert.assertTrue(Utils.getVisibleText().contains("Project Admins"));
+    }
+
+    @When("^Project Admin enter Username and Password created by super admin$")
+    public void enter_Username_and_Password_created_by_super_admin() {
+        loginPage.enterUsername(uname);
+        loginPage.enterPassword(pwd);
+        loginPage.clickLoginButton();
+        Utils.sleep(5);
+
+    }
+    @Then("^Project Admin should login successfully$")
+    public void Project_Admin_should_login_successfully() {
+        // Utils.sleep(5);
+        Assert.assertTrue(Utils.isElementPresent(By.linkText("Logout")));
+    }
+
+    @Then("^Project Admin should see 'Welcome ProjectAdmin' text message,dashboard.$")
+    public void Admin_should_see_Welcome_ProjectAdmin_text_message_dashboard() {
+        Assert.assertTrue(Utils.isTextPresent(fullname));
+    }
+    @And("^Admin Saved new project admin details$")
+    public void Admin_Saved_the_ProjectAdmin_details()  {
+        addprojectadminpage.saveProjectAdmins();
+
+    }
+
+    @And("^Admin Clicks the 'Save ' button$")
+    public void Admin_Clicks_the_Save_button() {
+        addprojectadminpage.saveProjectAdmins();
+    }
 }
+
 
 

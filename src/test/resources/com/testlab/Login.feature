@@ -27,6 +27,19 @@ Feature: Admin can log into the portal
     ||Admin123|Please enter valid username|
     |Admin||Please enter valid password|
 
+
+  Scenario: Project Admin can login with valid Username and Password created by SuperAdmin
+    Given Admin is on the 'Add Project Admins ' Page
+    When the User enters the Valid data in all the fields
+    And Admin Saved new project admin details
+    Then user navigate to project admins list page
+    When Admin clicks on Logout button
+    Then Admin is in login page
+    When Project Admin enter Username and Password created by super admin
+    Then Project Admin should login successfully
+    And  Project Admin should see 'Welcome ProjectAdmin' text message,dashboard.
+
+
 #@When("^I enter username as \"([^\"]*)\"$")
 #  Scenario Outline: Username and Password field should not take more than 50 chars
 #
