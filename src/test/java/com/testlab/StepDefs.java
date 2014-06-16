@@ -50,7 +50,7 @@ public class StepDefs {
         addtester = new AddTester();
 
        if(Utils.isElementPresent(By.linkText("Logout")))
-        home.Logout();
+       home.Logout();
 
     }
 
@@ -71,18 +71,19 @@ public class StepDefs {
     @When("^Admin enters '(.*)' as username$")
     public void Admin_enters_username(String username) {
 
-        loginPage.enterUsername(username);
+        driver.findElement(By.id("username")).sendKeys(username);
     }
 
     @When("^Admin enters '(.*)' as password$")
     public void Admin_enters_Admin_as_password(String password) {
-        loginPage.enterPassword(password);
+        driver.findElement(By.name("password")).sendKeys(password);
+
     }
 
     @When("^Admin clicks on 'login' button$")
     public void Admin_clicks_on_login_button() {
 
-        loginPage.clickLoginButton();
+        driver.findElement(By.tagName("button")).click();
         Utils.sleep(5);
     }
 
@@ -106,13 +107,12 @@ public class StepDefs {
 
     @Given("^Admin is logged in$")
     public void Admin_is_logged_in() {
-        loginPage.enterUsername("testlabadmin");
-        loginPage.enterPassword("Admin1");
-        loginPage.clickLoginButton();
+        loginPage.login("testlabadmin", "Admin1");
         Utils.sleep(5);
         Assert.assertTrue(Utils.isTextPresent("Hi, superadmin"));
 
     }
+
 
     @Given("^Admin can see logout button on Home Screen$")
     public void Admin_can_see_logout_button_on_Home_Screen() {
@@ -159,9 +159,7 @@ public class StepDefs {
 
     @Given("^Admin is on the 'Add Project' Page$")
     public void Admin_is_on_the_Add_Project_Page() {
-        loginPage.enterUsername("testlabadmin");
-        loginPage.enterPassword("Admin1");
-        loginPage.clickLoginButton();
+        loginPage.login("testlabadmin","Admin1");
         Utils.sleep(5);
         //   Assert.assertTrue(Utils.isTextPresent("Add project"));
         home.navigateToAddProject();
@@ -447,9 +445,7 @@ public class StepDefs {
 
     @Given("^User is on the 'Add Project Admin' Page logged in with '(.*)' as username and '(.*)' as password$")
     public void User_is_on_the_Add_Project_Admin_Page_logged_in_with_testlabadmin_as_username_and_Admin1_as_password(String uname, String pwd) {
-        loginPage.enterUsername(uname);
-        loginPage.enterPassword(pwd);
-        loginPage.clickLoginButton();
+        loginPage.login(uname,pwd);
         Utils.sleep(5);
         home.navigateToAddProjectAdminUser();
         Assert.assertTrue(Utils.isTextPresent("Add Project Admin"));
@@ -532,9 +528,7 @@ public class StepDefs {
     //smitha
     @Given("^Admin is on the 'Add Project Admins ' Page$")
     public void Admin_is_on_the_Add_Project_Admins_Page() {
-        loginPage.enterUsername("testlabadmin");
-        loginPage.enterPassword("Admin1");
-        loginPage.clickLoginButton();
+
         Utils.sleep(5);
         //   Assert.assertTrue(Utils.isTextPresent("Add project"));
         home.navigateToAddProjectAdminUser();
@@ -547,9 +541,7 @@ public class StepDefs {
 
     @When("^Project Admin enter Username and Password created by super admin$")
     public void enter_Username_and_Password_created_by_super_admin() {
-        loginPage.enterUsername(uname);
-        loginPage.enterPassword(pwd);
-        loginPage.clickLoginButton();
+        loginPage.login("testlabadmin","Admin1");
         Utils.sleep(5);
 
     }

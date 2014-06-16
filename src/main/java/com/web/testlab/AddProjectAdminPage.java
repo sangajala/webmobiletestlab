@@ -34,6 +34,19 @@ public class AddProjectAdminPage {
             driver.findElement(By.xpath(".//*[@id='success_dialog']/div/div/div/button")).click();
 
         }
+
+
+
+    public void resetFields()
+    {
+        driver.findElement(By.xpath(".//*[@id='createprojectadmin']/div/button[3]")).click();
+
+    }
+
+    public void back()
+    {
+        driver.findElement(By.xpath(".//*[@id='createprojectadmin']/div/button[1]")).click();
+    }
 }
 
 
