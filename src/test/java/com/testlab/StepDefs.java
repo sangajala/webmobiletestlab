@@ -49,12 +49,16 @@ public class StepDefs {
         testers = new Testers();
         addtester = new AddTester();
 
+       if(Utils.isElementPresent(By.linkText("Logout")))
+        home.Logout();
+
     }
 
     @After
     public void closeBrowser() throws MalformedURLException, InterruptedException {
 
         driver.quit();
+
         //.QuitBrowser();
 
     }
