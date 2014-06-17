@@ -26,10 +26,12 @@ public class StepDefs {
     AddProjectAdminPage addprojectadminpage;
     Testers testers;
     AddTester addtester;
+    TestCasesPage testcasespage;
     Random random = new Random();
     String name1;
     public static String name;
     String fullname, uname, pwd, confpwd, email, favplace, project;
+    String Title, Owner, Description, ExpectedResult;
 
     @Before
     public void StartBrowser() throws MalformedURLException, InterruptedException {
@@ -48,9 +50,10 @@ public class StepDefs {
         addprojectadminpage = new AddProjectAdminPage();
         testers = new Testers();
         addtester = new AddTester();
+        testcasespage = new TestCasesPage();
 
-       if(Utils.isElementPresent(By.linkText("Logout")))
-       home.Logout();
+        if (Utils.isElementPresent(By.linkText("Logout")))
+            home.Logout();
 
     }
 
@@ -159,7 +162,7 @@ public class StepDefs {
 
     @Given("^Admin is on the 'Add Project' Page$")
     public void Admin_is_on_the_Add_Project_Page() {
-        loginPage.login("testlabadmin","Admin1");
+        loginPage.login("testlabadmin", "Admin1");
         Utils.sleep(5);
         //   Assert.assertTrue(Utils.isTextPresent("Add project"));
         home.navigateToAddProject();
@@ -445,7 +448,7 @@ public class StepDefs {
 
     @Given("^User is on the 'Add Project Admin' Page logged in with '(.*)' as username and '(.*)' as password$")
     public void User_is_on_the_Add_Project_Admin_Page_logged_in_with_testlabadmin_as_username_and_Admin1_as_password(String uname, String pwd) {
-        loginPage.login(uname,pwd);
+        loginPage.login(uname, pwd);
         Utils.sleep(5);
         home.navigateToAddProjectAdminUser();
         Assert.assertTrue(Utils.isTextPresent("Add Project Admin"));
@@ -460,9 +463,8 @@ public class StepDefs {
         confpwd = "Kate12";
         email = "james02@gmail.co.uk";
         favplace = "london";
-        project = "testlab";
+        project = "Manual Testing94";
         addprojectadminpage.enterProjectAdmins(fullname, uname, pwd, confpwd, email, favplace, project);
-
     }
 
     @And("^User Clicks the 'Save ' button$")
@@ -497,6 +499,14 @@ public class StepDefs {
     @When("^User does not enter the mandatory fields$")
     public void User_does_not_enter_the_mandatory_fields() {
         home.navigateToAddProjectAdminUser();
+        fullname = null;
+        uname = "jack" + new Random().nextInt(100);
+        pwd = "Kate12";
+        confpwd = "Kate12";
+        email = "james02@gmail.co.uk";
+        favplace = "london";
+        project = "Manual Testing60";
+        addprojectadminpage.enterProjectAdmins(fullname, uname, pwd, confpwd, email, favplace, project);
         Utils.sleep(5);
     }
 
@@ -528,7 +538,7 @@ public class StepDefs {
     //smitha
     @Given("^Admin is on the 'Add Project Admins ' Page$")
     public void Admin_is_on_the_Add_Project_Admins_Page() {
-
+        loginPage.login("testlabadmin", "Admin1");
         Utils.sleep(5);
         //   Assert.assertTrue(Utils.isTextPresent("Add project"));
         home.navigateToAddProjectAdminUser();
@@ -541,10 +551,11 @@ public class StepDefs {
 
     @When("^Project Admin enter Username and Password created by super admin$")
     public void enter_Username_and_Password_created_by_super_admin() {
-        loginPage.login("testlabadmin","Admin1");
+        loginPage.login(uname, pwd);
         Utils.sleep(5);
 
     }
+
     @Then("^Project Admin should login successfully$")
     public void Project_Admin_should_login_successfully() {
         // Utils.sleep(5);
@@ -555,8 +566,9 @@ public class StepDefs {
     public void Admin_should_see_Welcome_ProjectAdmin_text_message_dashboard() {
         Assert.assertTrue(Utils.isTextPresent(fullname));
     }
+
     @And("^Admin Saved new project admin details$")
-    public void Admin_Saved_the_ProjectAdmin_details()  {
+    public void Admin_Saved_the_ProjectAdmin_details() {
         addprojectadminpage.saveProjectAdmins();
 
     }
@@ -564,6 +576,91 @@ public class StepDefs {
     @And("^Admin Clicks the 'Save ' button$")
     public void Admin_Clicks_the_Save_button() {
         addprojectadminpage.saveProjectAdmins();
+    }
+
+    @Given("^Project Admin is in 'Test Case view panel' Page$")
+    public void Project_Admin_is_in_Add_Test_Case_Page() {
+        loginPage.login("projectadmin", "Admin1");
+        Utils.sleep(5);
+        home.navigateToTestCaseViewPanel();
+    }
+
+
+    @And("^Click on AddTestCase$")
+    public void Click_on_AddTestCase() {
+        testcasespage.clickAddtestcase();
+
+    }
+
+    @When("^enters all valid data$")
+    public void enters_all_valid_data() {
+        Title = "Test case Title";
+        Owner = "Testerone";
+        Description = "Testcase description";
+        ExpectedResult = "Result expected";
+        testcasespage.AddTestCase(Title, Owner, Description, ExpectedResult);
+    }
+
+    @And("^'Save' AddTestCase$")
+    public void click_Save_button_for_save_new_TestCase() {
+        testcasespage.SaveTestCase();
+    }
+
+    @Then("^Navigates to the Test cases view panel$")
+    public void Navigates_to_the_Test_cases_view_panel() {
+        Assert.assertTrue(Utils.isTextPresent("TC Id"));
+    }
+
+    @And("^can see the newly added test case$")
+    public void can_see_the_newly_added_test_case() {
+        Utils.sleep(5);
+        Assert.assertTrue(Utils.isTextPresent(Title));
+    }
+
+    @When("^User enters '(.*)','(.*)','(.*)','(.*)' as invalid details$")
+    public void User_enters_Title_Owner_Description_Expected_Results_as_invalid_details(String Title, String Owner, String Description, String ExpectedResult) {
+        testcasespage.AddTestCase(Title, Owner, Description, ExpectedResult);
+        Utils.sleep(5);
+    }
+
+    @And("^Testcases already added to the view panel$")
+    public void Testcases_already_added_to_the_view_panel() {
+        Assert.assertTrue(Utils.isElementPresent(By.cssSelector("img[title=\"Edit Testcase\"]")));
+
+    }
+
+    @When("^Clicks on the 'Edit Test Case' image button of the testcase to be edited$")
+    public void Clicks_on_the_Edit_Test_Case_image_button_of_the_testcase_to_be_edited() {
+        testcasespage.ClickEditTestCaselink();
+    }
+
+    @Then("^User sees the 'Edit Test Case' Page with the already added data$")
+    public void User_sees_the_Edit_Test_Case_Page_with_the_already_added_data() {
+        Assert.assertTrue(Utils.isTextPresent("Edit Testcase"));
+
+    }
+
+    @When("^User changes any field with valid data$")
+    public void User_changes_any_field_with_valid_data() {
+        Title = "Edit Test case";
+        Owner = "Testerone1";
+        Description = "Edit Testcase description";
+        ExpectedResult = "Edit Result expected";
+        testcasespage.EditTestCase(Title, Owner, Description, ExpectedResult);
+
+    }
+
+
+    @And("^save Edit TestCase$")
+    public void save_Edit_TestCase() {
+        testcasespage.SaveEditTestCase();
+    }
+
+
+    @When("^User edits '(.*)','(.*)','(.*)','(.*)' as invalid details$")
+    public void User_edits_Title_Owner_Description_Expected_Results_as_invalid_details(String Title, String Owner, String Description, String ExpectedResult) {
+        testcasespage.EditTestCase(Title, Owner, Description, ExpectedResult);
+        Utils.sleep(5);
     }
 }
 

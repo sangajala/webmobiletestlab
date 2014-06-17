@@ -43,4 +43,14 @@ public class HomePage {
         driver.findElement(By.id("myTable_next")).click();
     }
 
+    //public void navigateToaddTestcase()
+
+    public void navigateToTestCaseViewPanel() {
+        driver.findElement(By.linkText("Test Cases")).click();
+        driver.findElement(By.linkText("Expand All")).click();
+        driver.findElement(By.id("255")).click();
+        Utils.sleep(5);
+
+    }
+
 }
