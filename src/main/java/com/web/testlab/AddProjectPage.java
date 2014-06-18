@@ -5,12 +5,15 @@ public class AddProjectPage {
     WebDriver driver = BrowserFactory.getDriver();
 
         public void enterProjectname(String projname) {
-        driver.findElement(By.name("projnme")).sendKeys(projname);
+
+            driver.findElement(By.name("projnme")).clear();
+            driver.findElement(By.name("projnme")).sendKeys(projname);
     }
 
     public void enterProjectDesc(String desc) {
 
-        driver.findElement(By.name("projnme")).isDisplayed();
+       driver.findElement(By.name("projnme")).isDisplayed();
+        driver.findElement(By.name("projdesc")).clear();
         driver.findElement(By.id("projdesc")).sendKeys(desc);
     }
 

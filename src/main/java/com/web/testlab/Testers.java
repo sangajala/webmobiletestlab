@@ -14,4 +14,8 @@ public class Testers {
 
        Utils.sleep(5);
     }
+    public void DeleteTester() {
+        driver.findElement(By.xpath("//*[@id=\"myTable\"]/tbody/tr[1]/td[5]/a[2]/img")).click();
+
+    }
 }

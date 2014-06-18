@@ -52,5 +52,10 @@ public class HomePage {
         Utils.sleep(5);
 
     }
+    public void navigateToProjectsPage() {driver.findElement(By.linkText("Projects")).click();}
 
-}
+    public void navigateToTesterPage() {driver.findElement(By.linkText("Testers")).click();}
+
+    }
+
+

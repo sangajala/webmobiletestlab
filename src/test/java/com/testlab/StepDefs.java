@@ -24,11 +24,12 @@ public class StepDefs {
     AddProjectPage addProject;
     ProjectHomePage projecthomepage;
     AddProjectAdminPage addprojectadminpage;
+    ProjectsPage projectspage;
     Testers testers;
     AddTester addtester;
     TestCasesPage testcasespage;
     Random random = new Random();
-    String name1;
+    String name1, desc;
     public static String name;
     String fullname, uname, pwd, confpwd, email, favplace, project;
     String Title, Owner, Description, ExpectedResult;
@@ -51,6 +52,7 @@ public class StepDefs {
         testers = new Testers();
         addtester = new AddTester();
         testcasespage = new TestCasesPage();
+        projectspage = new ProjectsPage();
 
         if (Utils.isElementPresent(By.linkText("Logout")))
             home.Logout();
@@ -505,7 +507,7 @@ public class StepDefs {
         confpwd = "Kate12";
         email = "james02@gmail.co.uk";
         favplace = "london";
-        project = "Manual Testing60";
+        //project = "Manual Testing60";
         addprojectadminpage.enterProjectAdmins(fullname, uname, pwd, confpwd, email, favplace, project);
         Utils.sleep(5);
     }
@@ -662,6 +664,97 @@ public class StepDefs {
         testcasespage.EditTestCase(Title, Owner, Description, ExpectedResult);
         Utils.sleep(5);
     }
+
+    @Given("^user is in projects page$")
+    public void user_is_in_projects_page() {
+       loginPage.login("testlabadmin", "Admin1");
+        Utils.sleep(5);
+    }
+
+    @When("^click on delete option for selected project$")
+    public void click_on_delete_option_for_selected_project()  {
+      //driver.findElement(By.xpath("//*[@id=\"myTable\"]/tbody/tr[1]/td[4]/a[2]/img")).click();
+        projectspage.DeleteProject();
+    }
+
+    @Then("^navigate to the confirmation box with the two option ok and cancel$")
+    public void navigate_to_the_confirmation_box_with_the_two_option_ok_and_cancel() {
+        Assert.assertTrue(Utils.isTextPresent("Ok"));
+
+    }
+
+    @When("^click on ok button$")
+    public void click_on_ok_button() {
+        driver.findElement(By.xpath("//*[@id=\"delete_dialog\"]/div/div/form/div/button[1]")).click();
+    }
+
+    @Then("^Selected project should be deleted from the list$")
+    public void Selected_projected_should_be_deleted_from_the_list() {
+        Assert.assertTrue(Utils.isTextPresent("Name"));
+    }
+
+    @Given("^Project Admin is in testers page$")
+    public void Project_Admin_is_in_testers_page() {
+        loginPage.login("projectadmin", "Admin1");
+        Utils.sleep(5);
+        home.navigateToTesterPage();
+        Utils.sleep(5);
+    }
+
+    @When("^click on delete option for selected tester$")
+    public void click_on_delete_option_for_selected_tester() {
+      testers.DeleteTester();
+    }
+
+    @Then("^selected Tester should be deleted from the list$")
+    public void selected_Tester_should_be_deleted_from_the_list(){
+        Assert.assertTrue(Utils.isTextPresent("Name"));
+
+    }
+
+    @When("^click on cancel button$")
+    public void click_on_cancel_button()  {
+        driver.findElement(By.xpath("//*[@id=\"delete_dialog\"]/div/div/form/div/button[2]")).click();
+
+
+    }
+
+    @Then("^selected Tester should not be deleted$")
+    public void selected_Tester_should_not_be_deleted() {
+        Assert.assertTrue(Utils.isTextPresent("Name"));
+
+    }
+
+    @And("^click on Edit option for selected project$")
+    public void click_on_Edit_option_for_selected_project()  {
+      projectspage.EditProject();
+        Utils.sleep(5);
+    }
+
+    @When("^Admin edit Project with valid 'Project name' and 'Project description'$")
+    public void Admin_edit_Project_with_valid_Project_name_and_valid_Project_Desc() {
+        name = "Edit Project" + new Random().nextInt(100);
+        addProject.enterProjectname(name);
+        desc = "Edit project description" + new Random().nextInt(100);
+        addProject.enterProjectDesc(desc);
+        //addProject.enterProjectDesc("Edit Description");
+    }
+
+    @And("^edited project should be there in projects list$")
+    public void edited_projct_should_be_there_in_projects_list() throws Throwable {
+        Assert.assertTrue(Utils.isTextPresent(name));
+    }
+
+    @When("^Admin edit Project with existing 'Project name'$")
+    public void Admin_edit_Project_with_existing_Project_name() {
+        name = "Latest";
+        addProject.enterProjectname(name);
+    }
+
+  /*  @And("^Admin edit Project with valid 'Project description'$")
+    public void Admin_edit_Project_with_valid_Project_description() {
+       addProject.enterProjectDesc("Edit project Description");
+    }*/
 }
 
 
