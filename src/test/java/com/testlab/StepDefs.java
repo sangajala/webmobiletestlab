@@ -28,6 +28,7 @@ public class StepDefs {
     Testers testers;
     AddTester addtester;
     TestCasesPage testcasespage;
+    EditProjectAdminPage editprojectadminpage;
     Random random = new Random();
     String name1, desc;
     public static String name;
@@ -53,6 +54,7 @@ public class StepDefs {
         addtester = new AddTester();
         testcasespage = new TestCasesPage();
         projectspage = new ProjectsPage();
+        editprojectadminpage = new EditProjectAdminPage();
 
         if (Utils.isElementPresent(By.linkText("Logout")))
             home.Logout();
@@ -529,7 +531,7 @@ public class StepDefs {
 //
 //    }
 
-    @When("^User enters '(.*)','(.*)','(.*)','(.*)','(.*)','(.*)','(.*)' as invalid details$")
+    @When("^User enters '(.*)','(.*)','(.*)','(.*)','(.*)','(.*)','(.*)' as invalid details for project Admin$")
     public void User_enters_fullname_Username_Password_Confirmpassword_Email_favouriteplace_Project_as_invalid_details(String fullname, String uname, String pwd, String confpwd, String email, String favplace, String project) {
         addprojectadminpage.enterProjectAdmins(fullname, uname, pwd, confpwd, email, favplace, project);
 
@@ -585,6 +587,7 @@ public class StepDefs {
         loginPage.login("projectadmin", "Admin1");
         Utils.sleep(5);
         home.navigateToTestCaseViewPanel();
+
     }
 
 
@@ -626,8 +629,8 @@ public class StepDefs {
     }
 
     @And("^Testcases already added to the view panel$")
-    public void Testcases_already_added_to_the_view_panel() {
-        Assert.assertTrue(Utils.isElementPresent(By.cssSelector("img[title=\"Edit Testcase\"]")));
+     public void Testcases_already_added_to_the_view_panel() {
+      Assert.assertTrue(Utils.isElementPresent(By.cssSelector("img[title=\"Edit Testcase\"]")));
 
     }
 
@@ -749,6 +752,75 @@ public class StepDefs {
     public void Admin_edit_Project_with_existing_Project_name() {
         name = "Latest";
         addProject.enterProjectname(name);
+    }
+
+    @Given("^User is in project Admins page$")
+    public void User_is_in_project_Admins_page() {
+        loginPage.login("testlabadmin","Admin1");
+        Utils.sleep(5);
+        home.NavigateProjectAdminspage();
+
+    }
+
+    @And("^Click on Edit Project Admin link for the first user$")
+    public void Click_on_Edit_Project_Admin_link_for_the_first_user() {
+       driver.findElement(By.xpath("//*[@id=\"myTable\"]/tbody/tr[1]/td[5]/a[1]/img")).click();
+        Utils.sleep(5);
+    }
+
+    @When("^edit the '(.*)' as Fullname$")
+    public void edit_the_Project_admin_as_Fullname(String fullname) {
+       editprojectadminpage.Editfullname(fullname);
+
+    }
+
+    @And("^edit the '(.*)' as new UserName$")
+    public void edit_the_Proadmin_as_new_UserName(String uname)  {
+        uname = uname + String.valueOf(Math.abs(random.nextInt()));
+       editprojectadminpage.EdituserName(uname);
+    }
+
+    @And("^edit the '(.*)' as Password$")
+    public void edit_the_Password_as_Password(String pwd) {
+       editprojectadminpage.EditPassword(pwd);
+    }
+
+    @And("^edit the '(.*)' as Confirm Password$")
+    public void edit_the_Password_as_Confirm_Password(String pwd)  {
+       editprojectadminpage.EditConfirmPassword(pwd);
+    }
+
+    @And("^edit the '(.*)' as Email$")
+    public void edit_the_Example_test_com_as_Email(String Email)  {
+       editprojectadminpage.EditEmail(Email);
+    }
+
+    @And("^edit the '(.*)' as FavouritePlace$")
+    public void edit_the_London_as_FavouritePlace(String favplace) {
+      editprojectadminpage.EditFavouriteplace(favplace);
+    }
+
+    @And("^select the project$")
+    public void edit_the_Manual_testing_as_project() {
+        project = "Latest";
+      editprojectadminpage.Editproject(project);
+    }
+
+    @And("^user can view updated details for Project Admin$")
+    public void user_can_view_updated_details_for_Project_Admin() {
+        Utils.sleep(5);
+      // Assert.assertTrue(Utils.isTextPresent(uname));
+        Assert.assertTrue(Utils.getVisibleText().contains("Project admin"));
+    }
+
+    @Then("^User Should see the message dialog box 'Project Admin details updated Successfully'$")
+    public void User_Should_see_the_message_dialog_box_Project_Admin_details_updated_Successfully() throws Throwable {
+        Assert.assertTrue(Utils.isTextPresent("Project Admin details updated Successfully"));
+    }
+
+    @And("^User is in project Admins list page$")
+    public void User_is_in_project_Admins_list_page() {
+        Assert.assertTrue(Utils.isTextPresent("Assigned Project"));
     }
 
   /*  @And("^Admin edit Project with valid 'Project description'$")

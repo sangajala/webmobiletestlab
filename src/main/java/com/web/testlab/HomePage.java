@@ -56,6 +56,13 @@ public class HomePage {
 
     public void navigateToTesterPage() {driver.findElement(By.linkText("Testers")).click();}
 
+    public void NavigateProjectAdminspage() {
+      driver.findElement(By.linkText("Project Admins")).click();
+        Utils.sleep(5);
+
+
+    }
+
     }
 
 
