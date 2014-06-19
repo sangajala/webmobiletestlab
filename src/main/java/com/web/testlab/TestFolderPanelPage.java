@@ -3,9 +3,7 @@ package com.web.testlab;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-/**
- * Created by Rajesh on 19/06/2014.
- */
+
 public class TestFolderPanelPage {
     WebDriver driver = BrowserFactory.getDriver();
     public void  clickaddfolder()
