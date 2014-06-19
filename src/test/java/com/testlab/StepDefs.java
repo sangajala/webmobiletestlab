@@ -28,13 +28,11 @@ public class StepDefs {
     Testers testers;
     AddTester addtester;
     TestCasesPage testcasespage;
-    TestFolderPanelPage folderpanelpage;
     Random random = new Random();
     String name1, desc;
     public static String name;
     String fullname, uname, pwd, confpwd, email, favplace, project;
     String Title, Owner, Description, ExpectedResult;
-    static String fname;
 
     @Before
     public void StartBrowser() throws MalformedURLException, InterruptedException {
@@ -55,7 +53,6 @@ public class StepDefs {
         addtester = new AddTester();
         testcasespage = new TestCasesPage();
         projectspage = new ProjectsPage();
-        folderpanelpage = new TestFolderPanelPage();
 
         if (Utils.isElementPresent(By.linkText("Logout")))
             home.Logout();
@@ -752,64 +749,12 @@ public class StepDefs {
     public void Admin_edit_Project_with_existing_Project_name() {
         name = "Latest";
         addProject.enterProjectname(name);
-
-        // modified
-      Assert.assertTrue(driver.findElement(By.linkText("Project Settings")).isDisplayed());
     }
-// Bharathi
-
-    @Given("^Project Admin is in 'Test Case view panel' Page logged in as '(.*)' as username and '(.*)' as Password$")
-    public void Project_Admin_is_in_Test_Case_view_panel_Page_logged_in_as_projectadmin_as_username_and_Admin_as_Password(String uname,String Pwd)
-    {
-        loginPage.login(uname,Pwd);
-        Utils.sleep(5);
-        home.navigatetotestcasepage();
-        Assert.assertTrue(Utils.isTextPresent("Test Cases"));
-        Utils.sleep(5);
-
-     }
-
-
-    @When("^User clicks button to add a new folder$")
-    public void User_clicks_button_to_add_a_new_folder() {
-        folderpanelpage.clickaddfolder();
-        Utils.sleep(5);
-    }
-
-    @Then("^User can see the Add Folder popup window$")
-    public void User_can_see_the_Add_Folder_popup_window(){
-        Assert.assertTrue(Utils.isTextPresent("Add Folder"));
-    }
-
-
-
-    @When("^User enters the folder name as '(.*)'$")
-    public void User_enters_the_folder_name_as_Level_(String foldername) {
-        fname = foldername + new Random().nextInt(100);
-        folderpanelpage.enterfoldername(fname);
-
-    }
-
-    @And("^clicks save button$")
-    public void clicks_save_button() {
-       folderpanelpage.clicksave();
-        Utils.sleep(5);
-    }
-
-
-    @Then("^User can see the folder in the folder panel$")
-    public void User_can_see_the_folder_in_the_folder_panel() {
-
-        Assert.assertTrue(Utils.isTextPresent(fname));
-    }
-
 
   /*  @And("^Admin edit Project with valid 'Project description'$")
     public void Admin_edit_Project_with_valid_Project_description() {
        addProject.enterProjectDesc("Edit project Description");
-
     }*/
-
 }
 
 
