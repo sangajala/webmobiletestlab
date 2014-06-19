@@ -17,11 +17,3 @@ Scenario: User can add folders to the subfolders
 
 
 
-
-
-#And User selected a folder
-#Then '+' button to add the folder is enabled
-#And User adds a folder at this level
-#Then the folder is added
-#And User see the selected folder has dark background
-#And the added folder is shown as child item in the parent folder
