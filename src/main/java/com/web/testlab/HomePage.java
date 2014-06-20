@@ -61,6 +61,9 @@ public class HomePage {
     public void navigateToProjectsPage() {driver.findElement(By.linkText("Projects")).click();}
 
     public void navigateToTesterPage() {driver.findElement(By.linkText("Testers")).click();}
+    public void navigatetoaccountdetails(){
+         driver.findElement(By.linkText("My Account")).click();
+    }
 
     }
 

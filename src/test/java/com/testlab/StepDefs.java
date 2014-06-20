@@ -1,6 +1,7 @@
 package com.testlab;
 
 import java.net.MalformedURLException;
+import java.util.List;
 import java.util.Random;
 
 import com.web.testlab.*;
@@ -14,6 +15,7 @@ import cucumber.runtime.PendingException;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 public class StepDefs {
 
@@ -29,6 +31,7 @@ public class StepDefs {
     Testers testers;
     AddTester addtester;
     TestCasesPage testcasespage;
+    MyaccountPage myaccount;
     Random random = new Random();
     String name1, desc;
     public static String name;
@@ -56,6 +59,7 @@ public class StepDefs {
         testcasespage = new TestCasesPage();
         projectspage = new ProjectsPage();
         folderpanelpage = new TestFolderPanelPage();
+        myaccount = new MyaccountPage();
 
         if (Utils.isElementPresent(By.linkText("Logout")))
             home.Logout();
@@ -792,11 +796,120 @@ public class StepDefs {
        public void User_can_see_the_folder_in_the_folder_panel() {
             Assert.assertTrue(Utils.isTextPresent(fname));
        }
-  /*  @And("^Admin edit Project with valid 'Project description'$")
-    public void Admin_edit_Project_with_valid_Project_description() {
-       addProject.enterProjectDesc("Edit project Description");
-    }*/
+
+    @When("^User selects the level1 folder$")
+    public void User_selects_the_level_folder()  {
+      //folderpanelpage.clickfolder(fname);
+        Utils.sleep(5);
+        //doubt
+        driver.findElement(By.tagName("foldernme"));
+
+        }
+
+    @And("^User clicks button to add a sub folder$")
+    public void User_clicks_button_to_add_a_sub_folder()  {
+        folderpanelpage.clickaddfolder();
+        Utils.sleep(5);
+    }
+
+    @Then("^User can see the folder as a child folder in the folder panel$")
+    public void User_can_see_the_folder_as_a_child_folder_in_the_folder_panel() {
+        Assert.assertTrue(Utils.isTextPresent(fname));
+    }
+
+
+    @Given("^Super Admin is in 'My Accounts' Page logged in as '(.*)' as username and '(.*)' as password$")
+    public void Super_Admin_is_in_My_Accounts_Page_logged_in_as_testlabadmin_as_username_and_Admin_as_password(String uname,String pwd){
+       loginPage.login(uname,pwd);
+        Utils.sleep(5);
+        home.navigatetoaccountdetails();
+        Utils.sleep(5);
+    }
+
+    @When("^edit the full name as '(.*)'$")
+    public void edit_the_full_name_as_Superadmin_(String fullname)  {
+       myaccount.editfullname(fullname);
+    }
+
+    @And("^edit the username as '(.*)'$")
+    public void edit_the_username_as_Testlabadmin_(String uname)  {
+       myaccount.edituname(uname);
+    }
+
+    @And("^edit the password as '(.*)'$")
+    public void edit_the_password_as_Admin_(String pwd)  {
+        myaccount.editpwd(pwd);
+    }
+
+    @And("^edit the confirm password as '(.*)'$")
+    public void edit_the_confirm_password_as_Admin_(String confpwd) {
+       myaccount.editconfpwd(confpwd);
+    }
+
+    @And("^edit email as '(.*)'$")
+    public void edit_email_as_testlabadmin_example_com(String email) {
+        myaccount.editemail(email);
+    }
+
+    @And("^edit Favorite place as '(.*)'$")
+    public void edit_Favorite_place_as_London(String favplace) {
+      myaccount.editfavplace(favplace);
+    }
+
+    @And("^clicks 'Save' button$")
+    public void clicks_Save_button() {
+        myaccount.clicksave();
+        Utils.sleep(5);
+    }
+
+    @Then("^can see the success message dialog box as 'Profile is updated successfully'$")
+    public void can_see_the_success_message_dialog_box_as_Profile_is_updated_successfully()  {
+       Assert.assertTrue(Utils.isTextPresent("Profile is updated Successfully"));
+           }
+
+    @When("^click 'Ok' button$")
+    public void click_Ok_button() {
+        myaccount.clickok();
+    }
+
+    @Then("^ user is in same  page with updated details$")
+    public void _user_is_in_same_page_with_updated_details(){
+      Assert.assertTrue(Utils.isTextPresent("My Account"));
+
+    }
+
+    @Then("^the message '(.*)'$")
+    public void the_message_ErrorMessage_(String error){
+       Assert.assertTrue(Utils.getVisibleText().contains(error));
+    }
+
+
+    @And("^the user is in 'My Accounts' Page$")
+    public void the_user_is_in_My_Accounts_Page() {
+        Assert.assertTrue(Utils.isTextPresent("My Account"));
+    }
+
+    @When("^Super admin edits '(.*)','(.*)','(.*)','(.*)','(.*)','(.*)' as invalid details$")
+    public void Super_admin_edits_fullname_username_Password_ConfPassword_email_favplace_as_invalid_details(String fname,String uname,String pwd,String confpwd,String email,String favplace){
+       myaccount.editfullname(fname);
+        myaccount.edituname(uname);
+        myaccount.editpwd(pwd);
+        myaccount.editconfpwd(confpwd);
+        myaccount.editemail(email);
+        myaccount.editfavplace(favplace);
+    }
+
+
+
+    @Then("^can see '(.*)' displayed$")
+    public void can_see_ErrorMessage_displayed(String error) {
+        System.out.println(error);
+
+        Assert.assertTrue(Utils.isTextPresent(error));
+
+    }
 }
+
 
 
 
