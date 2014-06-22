@@ -42,4 +42,16 @@ public class TestCasesPage {
     public void SaveEditTestCase() {
         driver.findElement(By.xpath("//*[@id=\"edittestcase\"]/div/button[1]")).click();
     }
+
+    public void deletebutton(){
+        driver.findElement(By.xpath("/html/body/div[2]/div/div[2]/div[2]/div[1]/table/tbody/tr[1]/td[2]")).getText();
+
+        driver.findElement(By.xpath("/html/body/div[2]/div/div[2]/div[2]/div[1]/table/tbody/tr[1]/td[7]/img[2]")).click();
+
+    }
+    public void okbutton(){
+        driver.findElement(By.xpath("/html/body/div[5]/div/div/form/div/button[1]"));
+    }
 }
+
+
