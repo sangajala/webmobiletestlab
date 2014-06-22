@@ -597,7 +597,7 @@ public class StepDefs {
 
     @And("^Click on AddTestCase$")
     public void Click_on_AddTestCase() {
-       testcasespage.clickAddtestcase();
+        testcasespage.clickAddtestcase();
 
     }
 
@@ -674,13 +674,13 @@ public class StepDefs {
 
     @Given("^user is in projects page$")
     public void user_is_in_projects_page() {
-       loginPage.login("testlabadmin", "Admin1");
+        loginPage.login("testlabadmin", "Admin1");
         Utils.sleep(5);
     }
 
     @When("^click on delete option for selected project$")
-    public void click_on_delete_option_for_selected_project()  {
-      //driver.findElement(By.xpath("//*[@id=\"myTable\"]/tbody/tr[1]/td[4]/a[2]/img")).click();
+    public void click_on_delete_option_for_selected_project() {
+        //driver.findElement(By.xpath("//*[@id=\"myTable\"]/tbody/tr[1]/td[4]/a[2]/img")).click();
         projectspage.DeleteProject();
     }
 
@@ -710,17 +710,17 @@ public class StepDefs {
 
     @When("^click on delete option for selected tester$")
     public void click_on_delete_option_for_selected_tester() {
-      testers.DeleteTester();
+        testers.DeleteTester();
     }
 
     @Then("^selected Tester should be deleted from the list$")
-    public void selected_Tester_should_be_deleted_from_the_list(){
+    public void selected_Tester_should_be_deleted_from_the_list() {
         Assert.assertTrue(Utils.isTextPresent("Name"));
 
     }
 
     @When("^click on cancel button$")
-    public void click_on_cancel_button()  {
+    public void click_on_cancel_button() {
         driver.findElement(By.xpath("//*[@id=\"delete_dialog\"]/div/div/form/div/button[2]")).click();
 
 
@@ -733,8 +733,8 @@ public class StepDefs {
     }
 
     @And("^click on Edit option for selected project$")
-    public void click_on_Edit_option_for_selected_project()  {
-      projectspage.EditProject();
+    public void click_on_Edit_option_for_selected_project() {
+        projectspage.EditProject();
         Utils.sleep(5);
     }
 
@@ -757,57 +757,57 @@ public class StepDefs {
         name = "Latest";
         addProject.enterProjectname(name);
     }
+
     @Given("^Project Admin is in 'Test Case view panel' Page logged in as '(.*)' as username and '(.*)' as Password$")
-       public void Project_Admin_is_in_Test_Case_view_panel_Page_logged_in_as_projectadmin_as_username_and_Admin_as_Password(String uname,String Pwd)
-        {
-                loginPage.login(uname,Pwd);
-                Utils.sleep(5);
-                home.navigatetotestcasepage();
-                Assert.assertTrue(Utils.isTextPresent("Test Cases"));
-                Utils.sleep(5);
+    public void Project_Admin_is_in_Test_Case_view_panel_Page_logged_in_as_projectadmin_as_username_and_Admin_as_Password(String uname, String Pwd) {
+        loginPage.login(uname, Pwd);
+        Utils.sleep(5);
+        home.navigatetotestcasepage();
+        Assert.assertTrue(Utils.isTextPresent("Test Cases"));
+        Utils.sleep(5);
 
-          }
+    }
 
-       @When("^User clicks button to add a new folder$")
-       public void User_clicks_button_to_add_a_new_folder() {
-            folderpanelpage.clickaddfolder();
-           Utils.sleep(5);
-      }
+    @When("^User clicks button to add a new folder$")
+    public void User_clicks_button_to_add_a_new_folder() {
+        folderpanelpage.clickaddfolder();
+        Utils.sleep(5);
+    }
 
-     @Then("^User can see the Add Folder popup window$")
-        public void User_can_see_the_Add_Folder_popup_window(){
-       Assert.assertTrue(Utils.isTextPresent("Add Folder"));
-   }
+    @Then("^User can see the Add Folder popup window$")
+    public void User_can_see_the_Add_Folder_popup_window() {
+        Assert.assertTrue(Utils.isTextPresent("Add Folder"));
+    }
 
     @When("^User enters the folder name as '(.*)'$")
     public void User_enters_the_folder_name_as_Level_(String foldername) {
         fname = foldername + new Random().nextInt(100);
-                folderpanelpage.enterfoldername(fname);
+        folderpanelpage.enterfoldername(fname);
 
     }
 
-      @And("^clicks save button$")
-      public void clicks_save_button() {
-           folderpanelpage.clicksave();
-            Utils.sleep(5);
-     }
+    @And("^clicks save button$")
+    public void clicks_save_button() {
+        folderpanelpage.clicksave();
+        Utils.sleep(5);
+    }
 
-     @Then("^User can see the folder in the folder panel$")
-       public void User_can_see_the_folder_in_the_folder_panel() {
-            Assert.assertTrue(Utils.isTextPresent(fname));
-       }
+    @Then("^User can see the folder in the folder panel$")
+    public void User_can_see_the_folder_in_the_folder_panel() {
+        Assert.assertTrue(Utils.isTextPresent(fname));
+    }
 
     @When("^User selects the level1 folder$")
-    public void User_selects_the_level_folder()  {
-      //folderpanelpage.clickfolder(fname);
+    public void User_selects_the_level_folder() {
+        //folderpanelpage.clickfolder(fname);
         Utils.sleep(5);
         //doubt
         driver.findElement(By.tagName("foldernme"));
 
-        }
+    }
 
     @And("^User clicks button to add a sub folder$")
-    public void User_clicks_button_to_add_a_sub_folder()  {
+    public void User_clicks_button_to_add_a_sub_folder() {
         folderpanelpage.clickaddfolder();
         Utils.sleep(5);
     }
@@ -819,31 +819,31 @@ public class StepDefs {
 
 
     @Given("^Super Admin is in 'My Accounts' Page logged in as '(.*)' as username and '(.*)' as password$")
-    public void Super_Admin_is_in_My_Accounts_Page_logged_in_as_testlabadmin_as_username_and_Admin_as_password(String uname,String pwd){
-       loginPage.login(uname,pwd);
+    public void Super_Admin_is_in_My_Accounts_Page_logged_in_as_testlabadmin_as_username_and_Admin_as_password(String uname, String pwd) {
+        loginPage.login(uname, pwd);
         Utils.sleep(5);
         home.navigatetoaccountdetails();
         Utils.sleep(5);
     }
 
     @When("^edit the full name as '(.*)'$")
-    public void edit_the_full_name_as_Superadmin_(String fullname)  {
-       myaccount.editfullname(fullname);
+    public void edit_the_full_name_as_Superadmin_(String fullname) {
+        myaccount.editfullname(fullname);
     }
 
     @And("^edit the username as '(.*)'$")
-    public void edit_the_username_as_Testlabadmin_(String uname)  {
-       myaccount.edituname(uname);
+    public void edit_the_username_as_Testlabadmin_(String uname) {
+        myaccount.edituname(uname);
     }
 
     @And("^edit the password as '(.*)'$")
-    public void edit_the_password_as_Admin_(String pwd)  {
+    public void edit_the_password_as_Admin_(String pwd) {
         myaccount.editpwd(pwd);
     }
 
     @And("^edit the confirm password as '(.*)'$")
     public void edit_the_confirm_password_as_Admin_(String confpwd) {
-       myaccount.editconfpwd(confpwd);
+        myaccount.editconfpwd(confpwd);
     }
 
     @And("^edit email as '(.*)'$")
@@ -853,7 +853,7 @@ public class StepDefs {
 
     @And("^edit Favorite place as '(.*)'$")
     public void edit_Favorite_place_as_London(String favplace) {
-      myaccount.editfavplace(favplace);
+        myaccount.editfavplace(favplace);
     }
 
     @And("^clicks 'Save' button$")
@@ -863,9 +863,9 @@ public class StepDefs {
     }
 
     @Then("^can see the success message dialog box as 'Profile is updated successfully'$")
-    public void can_see_the_success_message_dialog_box_as_Profile_is_updated_successfully()  {
-       Assert.assertTrue(Utils.isTextPresent("Profile is updated Successfully"));
-           }
+    public void can_see_the_success_message_dialog_box_as_Profile_is_updated_successfully() {
+        Assert.assertTrue(Utils.isTextPresent("Profile is updated Successfully"));
+    }
 
     @When("^click 'Ok' button$")
     public void click_Ok_button() {
@@ -873,14 +873,14 @@ public class StepDefs {
     }
 
     @Then("^ user is in same  page with updated details$")
-    public void _user_is_in_same_page_with_updated_details(){
-      Assert.assertTrue(Utils.isTextPresent("My Account"));
+    public void _user_is_in_same_page_with_updated_details() {
+        Assert.assertTrue(Utils.isTextPresent("My Account"));
 
     }
 
     @Then("^the message '(.*)'$")
-    public void the_message_ErrorMessage_(String error){
-       Assert.assertTrue(Utils.getVisibleText().contains(error));
+    public void the_message_ErrorMessage_(String error) {
+        Assert.assertTrue(Utils.getVisibleText().contains(error));
     }
 
 
@@ -890,15 +890,14 @@ public class StepDefs {
     }
 
     @When("^Super admin edits '(.*)','(.*)','(.*)','(.*)','(.*)','(.*)' as invalid details$")
-    public void Super_admin_edits_fullname_username_Password_ConfPassword_email_favplace_as_invalid_details(String fname,String uname,String pwd,String confpwd,String email,String favplace){
-       myaccount.editfullname(fname);
+    public void Super_admin_edits_fullname_username_Password_ConfPassword_email_favplace_as_invalid_details(String fname, String uname, String pwd, String confpwd, String email, String favplace) {
+        myaccount.editfullname(fname);
         myaccount.edituname(uname);
         myaccount.editpwd(pwd);
         myaccount.editconfpwd(confpwd);
         myaccount.editemail(email);
         myaccount.editfavplace(favplace);
     }
-
 
 
     @Then("^can see '(.*)' displayed$")
@@ -909,8 +908,15 @@ public class StepDefs {
 
     }
 
-    @When("^User selects the delete button end of the  test case$")
-    public void User_selects_the_delete_button_end_of_the_test_case() {
+
+    @And("^User clicks  the link  'Test Cases'$")
+    public void User_clicks_the_link_Test_Cases() {
+        testcasespage.testcases();
+
+    }
+
+    @When("^User selects the delete button $")
+    public void User_selects_the_delete_button() {
         testcasespage.deletebutton();
         Utils.sleep(5);
     }
@@ -921,17 +927,36 @@ public class StepDefs {
 
     }
 
-    @Then("^User clicks  'Ok' button$")
-    public void User_clicks_Ok_button() {
-        testcasespage.okbutton();
 
-    }
+
 
     @Then("^User can't see the testcase in 'Test Case' section$")
-    public void User_can_t_see_the_testcase_in_Test_Case_section(){
-        Assert.assertFalse(Utils.isTextPresent(Title));
+    public void User_can_t_see_the_testcase_in_Test_Case_section() {
+
+    }
+
+    @When("^User click the delete button$")
+    public void User_click_the_delete_button() {
+        testcasespage.deletebutton();
+        Utils.sleep(5);
+    }
+
+
+    @Then("^User click the  'Ok' button$")
+    public void User_click_the_Ok_button() {
+        testcasespage.okbutton();
+        Utils.sleep(5);
+
+
+    }
+
+    @And("^Clicks the folder 'Level(\\d+)'$")
+    public void Clicks_the_folder_Level_(int arg1){
+        testcasespage.newtestfolder();
+        Utils.sleep(5);
     }
 }
+
 
 
 

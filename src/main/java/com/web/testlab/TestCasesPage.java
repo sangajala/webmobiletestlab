@@ -9,8 +9,14 @@ import java.security.acl.Owner;
 public class TestCasesPage {
     WebDriver driver = BrowserFactory.getDriver();
 
+    public void testcases(){
+
+        driver.findElement(By.linkText("Test Cases")).click();
+        Utils.sleep(5);
+    }
+
     public void clickAddtestcase() {
-     driver.findElement(By.linkText("Add Testcase")).click();
+     driver.findElement(By.id("adhdtestcsebtn")).click();
         Utils.sleep(5);
     }
 
@@ -51,6 +57,9 @@ public class TestCasesPage {
     }
     public void okbutton(){
         driver.findElement(By.xpath("/html/body/div[5]/div/div/form/div/button[1]"));
+    }
+    public void newtestfolder(){
+        driver.findElement(By.xpath("/html/body/div[2]/div/div[2]/div[1]/div/ul/li[28]/div")).click();
     }
 }
 
