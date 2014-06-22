@@ -597,7 +597,7 @@ public class StepDefs {
 
     @And("^Click on AddTestCase$")
     public void Click_on_AddTestCase() {
-        testcasespage.clickAddtestcase();
+       testcasespage.clickAddtestcase();
 
     }
 
@@ -907,6 +907,29 @@ public class StepDefs {
 
         Assert.assertTrue(Utils.isTextPresent(error));
 
+    }
+
+    @When("^User selects the delete button end of the  test case$")
+    public void User_selects_the_delete_button_end_of_the_test_case() {
+        testcasespage.deletebutton();
+        Utils.sleep(5);
+    }
+
+    @Then("^User can see the message 'Do you really want to delete the Testcase'$")
+    public void User_can_see_the_message_Do_you_really_want_to_delete_the_Testcase() {
+        driver.findElement(By.xpath("/html/body/div[5]/div/div/form/p"));
+
+    }
+
+    @Then("^User clicks  'Ok' button$")
+    public void User_clicks_Ok_button() {
+        testcasespage.okbutton();
+
+    }
+
+    @Then("^User can't see the testcase in 'Test Case' section$")
+    public void User_can_t_see_the_testcase_in_Test_Case_section(){
+        Assert.assertFalse(Utils.isTextPresent(Title));
     }
 }
 
