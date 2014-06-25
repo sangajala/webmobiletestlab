@@ -13,9 +13,18 @@ public class Utils
 		 {
 		  Select sel = new Select(driver.findElement(by));
 		  sel.selectByVisibleText(text);
+
 		 }
-	  
-	  public static boolean isElementPresent(By element)
+    public static void selectFromDropDown1(By by, int index)
+    {
+        Select sel = new Select(driver.findElement(by));
+        sel.selectByIndex(index);
+
+    }
+
+
+
+    public static boolean isElementPresent(By element)
 	    {
 	        try 
 	        {

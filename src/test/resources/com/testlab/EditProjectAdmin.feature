@@ -1,4 +1,4 @@
-@EditProjectAdmin@isssue
+@EditProjectAdmin@issue
 Feature: Super Admin can edit project admin
 
 #  Scenario: Super Admin can view Edit Project Admin form
@@ -52,11 +52,12 @@ Feature: Super Admin can edit project admin
     And User is in project Admins list page
     And user can view updated details for Project Admin
 
-
+  @EditProjectAdmin
   Scenario Outline: Super Admin can not edit Project Admin with invalid data
     Given User is in project Admins page
     And Click on Edit Project Admin link for the first user
-    When User enters '<fullname>','<Username>','<Password>','<Confirmpassword>','<Email>','<favouriteplace>','<Project>' as invalid details for project Admin
+    When User edits '<fullname>','<Username>','<Password>','<Confirmpassword>','<Email>','<favouriteplace>' as invalid details for project Admin
+    And select the project
     And User Clicks the 'Save ' button
     Then '<Error Message>' should be displayed
    Examples:
