@@ -1,4 +1,5 @@
-@EditProjectAdmin@issue
+@EditProjectAdmin
+
 Feature: Super Admin can edit project admin
 
 #  Scenario: Super Admin can view Edit Project Admin form
@@ -52,18 +53,29 @@ Feature: Super Admin can edit project admin
     And User is in project Admins list page
     And user can view updated details for Project Admin
 
-  @EditProjectAdmin
+
+
+
+
   Scenario Outline: Super Admin can not edit Project Admin with invalid data
     Given User is in project Admins page
     And Click on Edit Project Admin link for the first user
-    When User edits '<fullname>','<Username>','<Password>','<Confirmpassword>','<Email>','<favouriteplace>' as invalid details for project Admin
-    And select the project
+    When User edits '<fullname>','<Username>','<Password>','<Confirmpassword>','<Email>','<favouriteplace>','<Project>' as invalid details for project Admin
+   # And select the project
     And User Clicks the 'Save ' button
     Then '<Error Message>' should be displayed
    Examples:
-    |fullname    |Username    |Password|Confirmpassword|Email   |  favouriteplace| Project | Error Message|
-    |testfulname|$%$Name|Testpass1  |Testpass1          |testuser@example.com   |London   | Latest|Only alphanumeric characters are allowed|
-   # |testfulname|       |Testpass1  |Testpass1          |testuser@example.com   |London   |Latest|Please enter all the mandatory |
+    |fullname|Username|Password|Confirmpassword|Email|favouriteplace|Project|Error Message|
+    |Proname|Prro@@@|password1|password1|tester@gmail.com|London|2|Only alphanumeric characters are allowed|
+    |testfulname||Testpass1|Testpass1|testuser@example.com|london|2|Please enter all the mandatory fields|
+    |testfulname|Projectadmin1|Testpass1|Testpass2|testuser@example.com|london|2|Confirm password does not match the password|
+    |testfulname|Projectadmin1|test|test|testuser@example.com|london|2|Password should contains atleast 1 Capital letter and 1 Numeric|
+    |testfulname|Projectadmin1|Test123|Test123|test@example@ |london|2|Invalid Email Address|
+    |testfulname|Projectadmin1|Test123|Test123|test@example.com|london123|2|Only alphabates are allowed|
+    ||Projectadmin1|Testpass1|Testpass1|testuser@example.com|london|2|Please enter all the mandatory fields|
+    |testfulname|Projectadmin1|Testpass1|Testpass1||london|2|Please enter all the mandatory fields|
+    |testfulname|projectadmin1||Testpass1|testuser@example.com|london|2|Please enter all the mandatory fields|
+
 
 
   Scenario: Super Admin can not edit Project Admin with different passwords
@@ -74,6 +86,7 @@ Feature: Super Admin can edit project admin
     And edit the 'Password12' as Confirm Password
     And User Clicks the 'Save ' button
     Then the Error message is shown as Password mismatch
+
 
 
 #  Scenario: User should be able to navigate to home page any time
