@@ -61,7 +61,21 @@ public class HomePage {
     public void navigateToProjectsPage() {driver.findElement(By.linkText("Projects")).click();}
 
     public void navigateToTesterPage() {driver.findElement(By.linkText("Testers")).click();}
+    public void NavigateProjectAdminspage() {
+               driver.findElement(By.linkText("Project Admins")).click();
+                Utils.sleep(5);
+         }
+      public void navigateToProjectSettings() {
+                driver.findElement(By.linkText("Project Settings")).click();
+            }
 
+                public void navigateToReports() {
+             driver.findElement(By.linkText("Reports")).click();
+            }
+    public void navigatetoaccountdetails(){
+        driver.findElement(By.linkText("My Account")).click();
     }
+
+}
 
 
