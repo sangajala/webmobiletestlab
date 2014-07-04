@@ -254,7 +254,7 @@ public class StepDefs {
 
     }
 
-    @Then("^Admin sees 'Which is yor favourite place' in new page$")
+    @Then("^Admin sees the new page to enter username and favorite place$")
     public void Admin_sees_Which_is_yor_favourite_place_in_new_page() {
 
         Assert.assertTrue(Utils.isElementPresent(By.name("favplace")));
@@ -262,7 +262,7 @@ public class StepDefs {
     }
 
 
-    @When("^Admin enters  answer as '(.*)'$")
+    @And("^Admin enters  answer as '(.*)'$")
     public void Admin_enters_answer_as_london(String favplace) {
         forgotpwdpage.enter_answer_as_london(favplace);
     }
@@ -588,9 +588,9 @@ public class StepDefs {
         addprojectadminpage.saveProjectAdmins();
     }
 
-    @Given("^Project Admin is in 'Test Case view panel' Page$")
-    public void Project_Admin_is_in_Add_Test_Case_Page() {
-        loginPage.login("projectadmin", "Admin1");
+    @Given("^Project Admin is in 'Test Case view panel' Page logged in as '(.*)' as username and '(.*)' as password$")
+    public void Project_Admin_is_in_Add_Test_Case_Page(String uname,String pwd) {
+        loginPage.login(uname,pwd);
         Utils.sleep(5);
         home.navigateToTestCaseViewPanel();
     }
@@ -943,7 +943,12 @@ public class StepDefs {
                     public void User_selects_Ok_for_Unhold () {
                         projectsettings.UnholdClickOk();
                     }
-                }
+
+    @When("^Admin Enters '(.*)' as username$")
+    public void Admin_Enters_testlabadmin_as_username(String uname){
+        forgotpwdpage.enterusername(uname);
+    }
+}
 
 
 

@@ -3,10 +3,11 @@ Feature: Admin can change the password by clicking forgot password
 
   Scenario:Admin uses Forgot your password link when admin forgots password.
     Given Admin is in login page
-    When Admin enters 'testlabadmin' as username
-    And Clicks on 'forgot Password' link
-    Then Admin sees 'Which is yor favourite place' in new page
-    When Admin enters  answer as 'london'
+   # When Admin enters 'testlabadmin' as username
+    When  Clicks on 'forgot Password' link
+    Then Admin sees the new page to enter username and favorite place
+    When Admin Enters 'testlabadmin' as username
+    And  Admin enters  answer as 'london'
     And Clicks on 'Go' Button
     Then Admin should redirect to new password page
     When Admin enters 'new password' as 'Tvishi123'
@@ -21,8 +22,9 @@ Feature: Admin can change the password by clicking forgot password
     Given Admin is in login page
     When Admin enters 'testlabadmin' as username
     And Clicks on 'forgot Password' link
-    Then Admin sees 'Which is yor favourite place' in new page
-    When Admin enters  answer as 'london'
+    Then Admin sees the new page to enter username and favorite place
+    When Admin Enters 'testlabadmin' as username
+    And Admin enters  answer as 'london'
     And Clicks on 'Go' Button
     Then Admin should redirect to new password page
     When Admin enters 'new password' as 'Tvishi123'
@@ -35,8 +37,9 @@ Feature: Admin can change the password by clicking forgot password
     Given Admin is in login page
     When Admin enters 'testlabadmin' as username
     And Clicks on 'forgot Password' link
-    Then Admin sees 'Which is yor favourite place' in new page
-    When Admin enters  answer as 'bangalore'
+    Then Admin sees the new page to enter username and favorite place
+    When Admin Enters 'testlabadmin' as username
+    And Admin enters  answer as 'bangalore'
     And Clicks on 'Go' Button
     Then Error message 'Invalid Answer' should display
 
@@ -46,8 +49,9 @@ Feature: Admin can change the password by clicking forgot password
     Given Admin is in login page
     When Admin enters 'testlabadmin' as username
     And Clicks on 'forgot Password' link
-    Then Admin sees 'Which is yor favourite place' in new page
-    When Admin enters  answer as 'london'
+    Then Admin sees the new page to enter username and favorite place
+    When Admin Enters 'testlabadmin' as username
+    And Admin enters  answer as 'london'
     And Clicks on 'Go' Button
     Then Admin should redirect to new password page
     When Admin enters 'new password' as 'Tvishi123'
@@ -67,8 +71,9 @@ Scenario: Resetting the Old password
   Given Admin is in login page
   When Admin enters 'testlabadmin' as username
   And Clicks on 'forgot Password' link
-  Then Admin sees 'Which is yor favourite place' in new page
-  When Admin enters  answer as 'london'
+  Then Admin sees the new page to enter username and favorite place
+  When Admin Enters 'testlabadmin' as username
+  And Admin enters  answer as 'london'
   And Clicks on 'Go' Button
   Then Admin should redirect to new password page
   When Admin enters 'new password' as 'Admin1'
