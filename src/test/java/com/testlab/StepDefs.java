@@ -1040,6 +1040,13 @@ public class StepDefs {
         Assert.assertTrue(Utils.isTextPresent(error));
 
     }
+
+    @Given("^Project Admin is in 'Test Case view panel' logged in  as '(.*)' as username and '(.*)' as password$")
+    public void Project_Admin_is_in_Test_Case_view_panel_logged_in_as_projectadmin_as_username_and_Admin_as_password(String uname,String pwd){
+        loginPage.login(uname,pwd);
+        Utils.sleep(5);
+
+    }
 }
 
 

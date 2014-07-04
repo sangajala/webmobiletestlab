@@ -6,7 +6,7 @@ Feature: Verify the Project Admin can edit the testcases
 
   Scenario:  Project Admin can edit the testcases created
 
-    Given Project Admin is in 'Test Case view panel' Page
+    Given Project Admin is in 'Test Case view panel' logged in  as 'projectadmin' as username and 'Admin1' as password
     And Testcases already added to the view panel
     When Clicks on the 'Edit Test Case' image button of the testcase to be edited
     Then User sees the 'Edit Test Case' Page with the already added data
@@ -20,7 +20,7 @@ Feature: Verify the Project Admin can edit the testcases
   @EditTestCase
   Scenario Outline: Project admin cannot edit testcase  with invalid data
 
-    Given Project Admin is in 'Test Case view panel' Page
+    Given Project Admin is in 'Test Case view panel' logged in  as 'projectadmin' as username and 'Admin1' as password
     And Testcases already added to the view panel
     When Clicks on the 'Edit Test Case' image button of the testcase to be edited
     Then User sees the 'Edit Test Case' Page with the already added data
