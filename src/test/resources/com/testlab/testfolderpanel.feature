@@ -1,4 +1,4 @@
-@testfolderpanel
+@~testfolderpanel
 Feature: Project Admin can create the folder structure for adding testcases
   As a Project Admin
   I want to create the folder structure

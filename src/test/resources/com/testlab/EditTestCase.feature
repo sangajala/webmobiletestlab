@@ -1,3 +1,5 @@
+
+@~edittestcase
 Feature: Verify the Project Admin can edit the testcases
 # As a Project Admin
 # I want to edit  testcases

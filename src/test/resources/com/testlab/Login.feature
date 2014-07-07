@@ -6,7 +6,7 @@ Feature: Admin can log into the portal
 
   Scenario: Project Admin can login with valid Username and Password created by SuperAdmin
     Given Admin is on the 'Add Project Admins ' Page
-    When the User enters the Valid data in all the fields
+    When the User enters 'tester','test','Testpass1','Testpass1','test@example.com','london','2' as valid fields
     And Admin Saved new project admin details
     Then user navigate to project admins list page
     When Admin clicks on Logout button

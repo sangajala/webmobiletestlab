@@ -1,4 +1,4 @@
-
+@myaccount
 Feature: As as superadmin can edit the acccount details
 
  Scenario: Super admin can edit Account details -Happy path
@@ -27,7 +27,7 @@ Feature: As as superadmin can edit the acccount details
   When click 'Ok' button
   Then  user is in same  page with updated details
 
-  @myaccount
+
  Scenario Outline: Super admin cannot edit Account details with invalid data
 
     Given Super Admin is in 'My Accounts' Page logged in as 'testlabadmin' as username and 'Admin1' as password

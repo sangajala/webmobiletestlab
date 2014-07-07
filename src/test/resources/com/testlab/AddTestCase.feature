@@ -1,4 +1,4 @@
-
+@~AddTestCase
 Feature: Verify the Creation of testcases in web
 # As a Project Admin
 # I want to add testcases
@@ -19,17 +19,17 @@ Feature: Verify the Creation of testcases in web
 
   Scenario: Project Admin can add a testcase with valid data
 
-    Given Project Admin is in 'Test Case view panel' Page
+    Given Project Admin is in 'Test Case view panel' Page logged in as 'projectadmin' as username and 'Admin1' as password
     And Click on AddTestCase
     When  enters all valid data
     And 'Save' AddTestCase
     Then Navigates to the Test cases view panel
     And can see the newly added test case
 
-  @AddTestCase
+
   Scenario Outline: Project admin cannot add testcase  with invalid data
 
-    Given Project Admin is in 'Test Case view panel' Page
+    Given Project Admin is in 'Test Case view panel' Page logged in as 'projectadmin' as username and 'Admin1' as password
     And Click on AddTestCase
     When User enters '<Title>','<Owner>','<Description>','<Expected Results>' as invalid details
     And 'Save' AddTestCase

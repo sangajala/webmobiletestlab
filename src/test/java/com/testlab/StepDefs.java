@@ -466,18 +466,18 @@ public class StepDefs {
         Assert.assertTrue(Utils.isTextPresent("Add Project Admin"));
     }
 
-    @When("^the User enters the Valid data in all the fields$")
-    public void the_User_enters_the_Valid_data_in_all_the_fields() {
-
-        fullname = "James" + new Random().nextInt(100);
-        uname = "jack" + new Random().nextInt(100);
-        pwd = "Kate12";
-        confpwd = "Kate12";
-        email = "james02@gmail.co.uk";
-        favplace = "london";
-        project = "Manual Testing94";
-        addprojectadminpage.enterProjectAdmins(fullname, uname, pwd, confpwd, email, favplace, project);
-    }
+//    @When("^the User enters the Valid data in all the fields$")
+//    public void the_User_enters_the_Valid_data_in_all_the_fields(String fullname,String uname,String pwd,String confpwd) {
+//
+//        fullname = "James" + new Random().nextInt(100);
+//        uname = "jack" + new Random().nextInt(100);
+//        pwd = "Kate12";
+//        confpwd = "Kate12";
+//        email = "james02@gmail.co.uk";
+//        favplace = "london";
+//     //   project = "Manual Testing94";
+//        addprojectadminpage.enterProjectAdmins(fullname, uname, pwd, confpwd, email, favplace, projectindex);
+//    }
 
     @And("^User Clicks the 'Save ' button$")
     public void User_Clicks_the_Save_button() {
@@ -508,19 +508,19 @@ public class StepDefs {
 
     }
 
-    @When("^User does not enter the mandatory fields$")
-    public void User_does_not_enter_the_mandatory_fields() {
-        home.navigateToAddProjectAdminUser();
-        fullname = null;
-        uname = "jack" + new Random().nextInt(100);
-        pwd = "Kate12";
-        confpwd = "Kate12";
-        email = "james02@gmail.co.uk";
-        favplace = "london";
-        //project = "Manual Testing60";
-        addprojectadminpage.enterProjectAdmins(fullname, uname, pwd, confpwd, email, favplace, project);
-        Utils.sleep(5);
-    }
+//    @When("^User does not enter the mandatory fields$")
+//    public void User_does_not_enter_the_mandatory_fields() {
+//        home.navigateToAddProjectAdminUser();
+//        fullname = null;
+//        uname = "jack" + new Random().nextInt(100);
+//        pwd = "Kate12";
+//        confpwd = "Kate12";
+//        email = "james02@gmail.co.uk";
+//        favplace = "london";
+//        //project = "Manual Testing60";
+//        addprojectadminpage.enterProjectAdmins(fullname, uname, pwd, confpwd, email, favplace, project);
+//        Utils.sleep(5);
+//    }
 
     @And("^User clicks 'Save' button$")
     public void User_clicks_Save_button() {
@@ -540,8 +540,8 @@ public class StepDefs {
 //    }
 
     @When("^Admin enters '(.*)','(.*)','(.*)','(.*)','(.*)','(.*)','(.*)' as invalid details$")
-    public void User_enters_fullname_Username_Password_Confirmpassword_Email_favouriteplace_Project_as_invalid_details(String fullname, String uname, String pwd, String confpwd, String email, String favplace, String project) {
-        addprojectadminpage.enterProjectAdmins(fullname, uname, pwd, confpwd, email, favplace, project);
+    public void User_enters_fullname_Username_Password_Confirmpassword_Email_favouriteplace_Project_as_invalid_details(String fullname, String uname, String pwd, String confpwd, String email, String favplace, int projectindex) {
+        addprojectadminpage.enterProjectAdmins(fullname, uname, pwd, confpwd, email, favplace, projectindex);
 
 
     }
@@ -570,7 +570,7 @@ public class StepDefs {
 
     @Then("^Project Admin should login successfully$")
     public void Project_Admin_should_login_successfully() {
-        // Utils.sleep(5);
+         Utils.sleep(5);
         Assert.assertTrue(Utils.isElementPresent(By.linkText("Logout")));
     }
 
@@ -1046,6 +1046,12 @@ public class StepDefs {
         loginPage.login(uname,pwd);
         Utils.sleep(5);
 
+    }
+
+    @When("^the User enters '(.*)','(.*)','(.*)','(.*)','(.*)','(.*)','(\\d+)' as valid fields$")
+    public void the_User_enters_the_Valid_data_in_all_the_fields_tester_test_Testpass_Testpass_test_example_com_london_(String fname,String uname,String pwd,String confpwd,String email,String favplace,int projectindex) throws Throwable {
+     String   username = uname + new Random().nextInt(100);
+        addprojectadminpage.enterProjectAdmins(fname, username, pwd, confpwd, email, favplace, projectindex);
     }
 }
 

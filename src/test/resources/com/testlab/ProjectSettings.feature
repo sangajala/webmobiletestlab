@@ -1,3 +1,4 @@
+@~ProjectSettings
 Feature: Verify the Project Settings functionality
 #  As a Project Admin
 #  I want to access the 'Project Settings'
@@ -22,7 +23,7 @@ Feature: Verify the Project Settings functionality
 #    When User selects 'cancel' in message dialog box
 #    Then No changes made
 
-  @ProjectSettings
+
   Scenario: Verify Project Admin can make all the testcases active /inactive at one go
 
     Given User is in 'Project Settings' page

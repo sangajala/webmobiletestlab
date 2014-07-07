@@ -1,4 +1,4 @@
-@Tester
+@addtester
 Feature: Project admin can add tester
 
   Scenario:Project admin can add tester - Happy path
@@ -36,23 +36,26 @@ Feature: Project admin can add tester
     When enters the '<full name>' as Fullname
     And enters '<Username>' as username
     And enters '<Password>' as password
-    And enters '<Password>' as confirm password
+    And enters '<ConfPassword>' as confirm password
     And enters '<Email>' as email
-    And enters 'London' as a favourite Place
+    And enters '<favplace>' as a favourite Place
     And saves the form
     Then the Error message '<ErrorMessage>' is shown as Error
     Then the add tester page is displayed
 
   Examples:
-    |full name|Username         |Password|      ErrorMessage|Email|
-#    |testfulname|Name|Pword|atleast minimum of 6 alphanumeric characters are allowed|test@trest.com|
-#    |testfulname|$%$Name|Pword$%$%|Only alphanumeric characters are allowed|test@trest.com|
+    |full name|Username|Password|ConfPassword|Email|favplace|ErrorMessage|
+    |testfulname||Test01|Test01|test@rest.com|london|Please enter all the mandatory fields|
+    ||tester|Test01|Test01|test@rest.com|london|Please enter all the mandatory fields|
+    |test&^*(|tester|Test01|Test01|test@rest.com|london|Only alphanumeric characters are allowed|
+    |tester|tes%$$$|Test01|Test01|test@rest.com|london|Only alphanumeric characters are allowed|
+    |tester|tester|Test01|Test02|test@rest.com|london|Confirm password does not match the password|
 #    |test fulname| | |Please enter all the mandatory fields|test@trest.com|
 #    |test fulname|  |ValidPass@123|Please enter all the mandatory fields|test@trest.com|
 #    |testfulname|Validuser| |Please enter all the mandatory fields|test@trest.com|
 #    ||Name|Pword|Please enter all the mandatory fields|test@trest.com|
 #    |*@�*&(�|Name|Pword|Only alphanumeric characters are allowed|test@trest.com|
-    |testfulname|Name12121|Pword1212|Invalid Email Address|testtt.c|
+
 
   Scenario: Project admin cannot add tester with diff passwords
     Given Admin is in login page

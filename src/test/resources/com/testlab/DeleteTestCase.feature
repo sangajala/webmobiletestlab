@@ -1,5 +1,5 @@
 #kavi
-@DeleteTestCase
+@~DeleteTestCase
 Feature: Project admin can delete the Test case
   Scenario: Project admin can delete Test cases
     Given Admin is in login page
