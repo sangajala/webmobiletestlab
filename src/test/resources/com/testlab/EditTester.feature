@@ -76,18 +76,7 @@ Feature: Project admin can edit tester
     |testone$&|%$^name|Pword|Pword|test@trest.com|Only alphanumeric characters are allowed|
     |testmandatory| | | |test@trest.com|Please enter all the mandatory fields|
 
-#  Examples:
-#    |full name|Username         |Password|      ErrorMessage|Email|
-#    |testfulname|Name|Pword|atleast minimum of 6 alphanumeric characters are allowed|test@trest.com|
-#    |testfulname|$%$Name|Pword$%$%|Only alphanumeric characters are allowed|test@trest.com|
-#    |test fulname| | |Please enter all the mandatory fields|test@trest.com|
-#    |test fulname|  |ValidPass@123|Please enter all the mandatory fields|test@trest.com|
-#    |testfulname|Validuser| |Please enter all the mandatory fields|test@trest.com|
-#    ||Name|Pword|Please enter all the mandatory fields|test@trest.com|
-#    |*@�*&(�|Name|Pword|Only alphanumeric characters are allowed|test@trest.com|
-#    |testfulname|Name1212|Pword121212|Invalid Email Address|testtt.c|
 
-#
 
   Scenario:Project admin can not edit tester with different passwords
 

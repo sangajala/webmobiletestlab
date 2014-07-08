@@ -39,6 +39,8 @@ public class StepDefs {
     String Title, Owner, Description, ExpectedResult;
     static String fname;
     static int index;
+    static String username;
+    static String adminpassword;
 
     @Before
     public void StartBrowser() throws MalformedURLException, InterruptedException {
@@ -563,7 +565,8 @@ public class StepDefs {
 
     @When("^Project Admin enter Username and Password created by super admin$")
     public void enter_Username_and_Password_created_by_super_admin() {
-        loginPage.login(uname, pwd);
+        System.out.println(username+adminpassword);
+        loginPage.login(username,adminpassword);
         Utils.sleep(5);
 
     }
@@ -713,12 +716,13 @@ public class StepDefs {
 
     @When("^click on delete option for selected tester$")
     public void click_on_delete_option_for_selected_tester() {
-      testers.DeleteTester();
-    }
+
+        testers.DeleteTester();
+            }
 
     @Then("^selected Tester should be deleted from the list$")
     public void selected_Tester_should_be_deleted_from_the_list(){
-        Assert.assertTrue(Utils.isTextPresent("Name"));
+
 
     }
 
@@ -731,6 +735,7 @@ public class StepDefs {
 
     @Then("^selected Tester should not be deleted$")
     public void selected_Tester_should_not_be_deleted() {
+
         Assert.assertTrue(Utils.isTextPresent("Name"));
 
     }
@@ -1048,10 +1053,23 @@ public class StepDefs {
 
     }
 
-    @When("^the User enters '(.*)','(.*)','(.*)','(.*)','(.*)','(.*)','(\\d+)' as valid fields$")
+    @When("^the User enters '(.*)','(.*)','(.*)','(.*)','(.*)','(.*)','(\\d+)' as fields$")
     public void the_User_enters_the_Valid_data_in_all_the_fields_tester_test_Testpass_Testpass_test_example_com_london_(String fname,String uname,String pwd,String confpwd,String email,String favplace,int projectindex) throws Throwable {
-     String   username = uname + new Random().nextInt(100);
-        addprojectadminpage.enterProjectAdmins(fname, username, pwd, confpwd, email, favplace, projectindex);
+
+        if (uname.isEmpty() ) {
+            System.out.println(uname);
+            username = "";
+        }
+        else{
+          username = uname + new Random().nextInt(100);}
+       adminpassword = pwd;
+        fullname = fname;
+        addprojectadminpage.enterProjectAdmins(fname, username, adminpassword, confpwd, email, favplace, projectindex);
+    }
+
+    @And("^Project Admin is back in testers page$")
+    public void Project_Admin_is_back_in_testers_page() {
+    Utils.isTextPresent("Testers");
     }
 }
 

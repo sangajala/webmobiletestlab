@@ -5,11 +5,7 @@ Feature: Edit Project as Super Admin
 #So that I can edit Project
 
 
-#  Scenario: User can view 'Edit Project' Page
-#
-#    Given Admin is in Projects page
-#    When click on edit project link for first project
-#    Then User can view edit project page
+
 
 
   Scenario: Admin can Edit the Project by clicking the 'Save' button in the 'Edit Project'

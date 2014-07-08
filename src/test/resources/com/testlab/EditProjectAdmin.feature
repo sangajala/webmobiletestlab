@@ -89,34 +89,3 @@ Feature: Super Admin can edit project admin
 
 
 
-#  Scenario: User should be able to navigate to home page any time
-#
-#    Given Super Admin is in project Admins page
-#    And select a project Admin from project Admins list
-#    When Click on edit project Admin link for the first user
-#    Then navigate to the Edit Project Admin form
-#  when edit Username as 'ProjectAdmin1'
-#    And click on Back button
-#    Then a confirmation box is shown
-#    When upon clicking on the ok button
-#    Then the User back to the previous page
-#    And data is not saved
-#
-#
-
-#  Scenario: User can reset the data to the previously saved values
-#
-#    Given Super Admin is in project Admins page
-#    And select a project Admin from project Admins list
-#    When Click on edit project Admin link for the first user
-#    Then navigate to the Edit Project Admin form
-#  when edit Username as 'ProjectAdmin1'
-#    And click on Reset button
-#    Then the data for username is reset by the old value
-#
-#
-
-
-
-
-
