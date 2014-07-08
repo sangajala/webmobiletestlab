@@ -3,11 +3,12 @@ package com.web.testlab;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.Select;
 
 public class AddProjectAdminPage {
     WebDriver driver = BrowserFactory.getDriver();
 
-        public void enterProjectAdmins(String fullname,String uname,String pwd,String confpwd,String email,String favplace,String project)
+        public void enterProjectAdmins(String fullname,String uname,String pwd,String confpwd,String email,String favplace,int projectindex)
         {
             Utils.sleep(5);
             driver.findElement(By.id("fulnme")).clear();
@@ -23,8 +24,10 @@ public class AddProjectAdminPage {
             driver.findElement(By.id("favplace")).clear();
             driver.findElement(By.id("favplace")).sendKeys(favplace);
             Utils.sleep(5);
-            Utils.selectFromDropDown(By.id("projectid"), project);
-            Utils.sleep(5);
+            Select sel = new Select(driver.findElement(By.id("projectid")));
+            sel.selectByIndex(projectindex);
+           // Utils.selectFromDropDown(By.id("projectid"), project);
+           // Utils.sleep(5);
 
 
         }
