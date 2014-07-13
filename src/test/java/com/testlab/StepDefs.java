@@ -30,6 +30,7 @@ public class StepDefs {
     Testers testers;
     AddTester addtester;
     EditProjectAdminPage editprojectadminpage;
+    DefectPage defectpage;
     MyaccountPage myaccount;
     TestCasesPage testcasespage;
     Random random = new Random();
@@ -65,6 +66,7 @@ public class StepDefs {
         projectsettings = new ProjectSettings();
         editprojectadminpage = new EditProjectAdminPage();
         myaccount = new MyaccountPage();
+        defectpage = new DefectPage();
 
         if (Utils.isElementPresent(By.linkText("Logout")))
             home.Logout();
@@ -1071,6 +1073,150 @@ public class StepDefs {
     public void Project_Admin_is_back_in_testers_page() {
     Utils.isTextPresent("Testers");
     }
+
+
+
+
+    //smita
+    @Given("^Project Admin is in 'Add Defect' Page logged in with '(.*)' as username and '(.*)' as password$")
+    public void Project_Admin_is_in_Add_Defect_Page_logged_in_with_testlabadmin_as_username_and_Admin_as_password(String uname, String Pswd)  {
+        loginPage.login(uname, Pswd);
+        Utils.sleep(5);
+        home.navigateToDefectPage();
+        defectpage.navigateToAddDefectPage();
+    }
+
+
+    @And("^clicks the 'Save' button$")
+    public void clicks_the_Save_button() {
+        defectpage.SaveDefect();
+        Utils.sleep(5);
+    }
+
+    @Then("^Navigates to the Defects page view panel$")
+    public void Navigates_to_the_Defects_page_view_panel() {
+        Assert.assertTrue(Utils.isTextPresent("Defect Id"));
+    }
+
+    @And("^can see the newly added defects$")
+    public void can_see_the_newly_added_defects() {
+        Assert.assertTrue(Utils.isTextPresent("DefectTitle"));
+    }
+
+    @When("^enter '(.*)','(.*)','(.*)','(.*)','(.*)','(.*)' as Title,Description,Expectedresults,Actualresults,Priority,Owner$")
+    public void enter_Title_Description_Expectedresults_Actualresults_Priority_Owner_as_Title_Description_Expectedresults_Actualresults_Priority_Owner_as_a_valid_data(String Title, String Description, String ExpectedResult, String ActualResult, int priority, int Owner) {
+        defectpage.AddDefect(Title, Description, ExpectedResult, ActualResult, priority, Owner);
+    }
+
+    @When("^enter '(.*)','(.*)','(.*)','(.*)','(.*)','(.*)' as invalid data$")
+    public void enter_Title_Description_ExpectedResults_ActualResults_Priority_Owner_as_invalid_data(String Title, String Description, String ExpectedResult, String ActualResult, int priority, int Owner) {
+        defectpage.AddDefect(Title, Description, ExpectedResult, ActualResult, priority, Owner);
+
+    }
+
+    @And("^the project admin/Testers is in the same page$")
+    public void the_project_admin_Testers_is_in_the_same_page() {
+        Assert.assertTrue(Utils.isTextPresent("Add Defect"));
+    }
+
+    @When("^user edit '(.*)','(.*)','(.*)','(.*)','(.*)','(.*)' as Title,Description,Expectedresults,Actualresults,Priority,Owner$")
+    public void user_edit_DefectTitle_Description_Expectedresults_Actualresults_as_Title_Description_Expectedresults_Actualresults_Priority_Owner(String Title, String Description, String ExpectedResult, String ActualResult, int index, int Owner) {
+        defectpage.EditDefect(Title, Description, ExpectedResult, ActualResult, index, Owner);
+
+    }
+
+    @And("^clicks the 'Save' button for edit defect$")
+    public void clicks_the_Save_button_for_edit_defect() {
+        defectpage.SaveEditDefect();
+    }
+
+    @Then("^Navigates to the ‘Defects view panel’$")
+    public void Navigates_to_the_Defects_view_panel() {
+        Assert.assertTrue(Utils.isTextPresent("Defects"));
+    }
+
+    @And("^can see the newly added defect$")
+    public void can_see_the_newly_added_defect() {
+        Assert.assertTrue(Utils.isTextPresent("EditDefectTitle"));
+    }
+
+    @Given("^Project Admin is in 'Edit Defects' Page logged in with '(.*)' as username and '(.*)' as password$")
+    public void Project_Admin_is_in_Edit_Defects_Page_logged_in_with_projectadmin_as_username_and_Admin_as_password(String uname, String pswd)  {
+        loginPage.login(uname,pswd);
+        Utils.sleep(5);
+        defectpage.navigateToDefectviewPage();
+        defectpage.navigateToEditDefect();
+
+    }
+
+
+    @When("^user Edit '(.*)','(.*)','(.*)','(.*)','(.*)','(.*)' as invalid data$")
+    public void Edit_Title_Description_ExpectedResults_ActualResults_Priority_Owner_as_invalid_data(String Title, String Description, String ExpectedResult, String ActualResult, int index, int Owner) {
+        defectpage.EditDefect(Title, Description, ExpectedResult, ActualResult, index, Owner);
+
+    }
+
+    @And("^attach '(.*)' as a file$")
+    public void attach_C_Users_abc_Pictures_png_as_a_file(String file) {
+        defectpage.Attachfile(file);
+
+    }
+
+    @And("^'(.*)' as a attachfile$")
+    public void _Attachment_File_as_a_attachfile(String file) {
+        defectpage.Attachfile(file);
+    }
+
+
+    @And("^Edit '(.*)' as a file$")
+    public void Edit_C_Users_abc_Pictures_png_as_a_file(String file) {
+        defectpage.Attachfile_edit(file);
+    }
+
+    @And("^edit '(.*)' as a attachfile$")
+    public void edit_Attachment_File_as_a_attachfile(String file) {
+        defectpage.Attachfile_edit(file);
+    }
+
+    @Given("^User is in Defects dashboard logged in with '(.*)' as username and '(.*)' as password$")
+    public void User_is_in_Defects_dashboard_logged_in_as_Project_Admin(String uname, String pswd) {
+        loginPage.login(uname, pswd);
+        Utils.sleep(5);
+        defectpage.navigateToDefectviewPage();
+
+
+    }
+
+    @When("^delete option is clicked$")
+    public void delete_option_is_clicked() {
+        driver.findElement(By.xpath("//*[@id=\"myTable\"]/tbody/tr[1]/td[6]/a[2]/img")).click();
+    }
+
+    @Then("^User sees dialog box asking for confirmation for deleting$")
+    public void User_sees_dialog_box_asking_for_confirmation_for_deleting() {
+        Assert.assertTrue(Utils.isTextPresent("Do you really want to delete the Defect ?"));
+    }
+
+    @When("^User clicks Cancel button$")
+    public void User_clicks_Cancel_button() {
+        driver.findElement(By.xpath("//*[@id=\"delete_dialog\"]/div/div/form/div/button[2]")).click();
+
+    }
+
+    @Then("^Defect not deleted from the list$")
+    public void Defect_not_deleted_from_the_list() {
+        Assert.assertTrue(Utils.isTextPresent("Defects"));
+    }
+
+    @When("^User clicks Ok button$")
+    public void User_clicks_Ok_button() {
+        driver.findElement(By.xpath("//*[@id=\"delete_dialog\"]/div/div/form/div/button[1]")).click();
+    }
+
+    @Then("^Defect deleted from the list$")
+    public void Defect_deleted_from_the_list() { Assert.assertTrue(Utils.isTextPresent("Defects"));}
+
+
 }
 
 
