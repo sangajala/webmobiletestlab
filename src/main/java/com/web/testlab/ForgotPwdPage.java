@@ -8,7 +8,7 @@ import org.openqa.selenium.WebDriver;
  */
 public class ForgotPwdPage {
     WebDriver driver = BrowserFactory.getDriver();
-    public void click_on_forgot_password(){driver.findElement(By.xpath("/html/body/div/div/form/div[2]/a ")).click();}
+    public void click_on_forgot_password(){driver.findElement(By.linkText("Forgot Password ?")).click();}
     public void enterusername(String uname){driver.findElement(By.name("user")).sendKeys(uname);}
     public void enter_answer_as_london(String favplace){  driver.findElement(By.name("favplace")).sendKeys(favplace);}
     public void click_on_go_buton(){driver.findElement(By.xpath("/html/body/div/div/form[1]/div[3]/button[2]")).click();}
