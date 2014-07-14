@@ -1217,7 +1217,82 @@ public class StepDefs {
     public void Defect_deleted_from_the_list() { Assert.assertTrue(Utils.isTextPresent("Defects"));}
 
 
-}
+
+    //kavitha
+    @And("^User clicks  the link  'Test Cases'$")
+    public void User_clicks_the_link_Test_Cases() {
+        testcasespage.testcases();
+
+    }
+
+    @When("^User selects the delete button $")
+    public void User_selects_the_delete_button() {
+        testcasespage.deletebutton();
+        Utils.sleep(5);
+    }
+
+    @Then("^User can see the message 'Do you really want to delete the Testcase'$")
+    public void User_can_see_the_message_Do_you_really_want_to_delete_the_Testcase() {
+        driver.findElement(By.xpath("/html/body/div[5]/div/div/form/p"));
+
+    }
+
+
+
+
+    @Then("^User can't see the testcase in 'Test Case' section$")
+    public void User_can_t_see_the_testcase_in_Test_Case_section() {
+        // Assert.assertFalse(Utils.isTextPresent("Test Cases"));
+        // Assert.assertFalse(driver.findElement(By.xpath("/html/body/div[2]/div/div[2]/div[2]/div[1]/table/tbody/tr[1]/td[2]")));
+
+
+
+    }
+
+
+    @When("^User click the delete button$")
+    public void User_click_the_delete_button() {
+        testcasespage.deletebutton();
+        Utils.sleep(5);
+    }
+
+
+    @Then("^User click the  'Ok' button$")
+    public void User_click_the_Ok_button() {
+        testcasespage.okbutton();
+        Utils.sleep(5);
+
+
+    }
+
+    @And("^Clicks the folder 'Level(\\d+)'$")
+    public void Clicks_the_folder_Level_(int arg1){
+        testcasespage.newtestfolder();
+        Utils.sleep(5);
+    }
+
+//    @Then("^User Clicks the new folder name as 'Level(\\d+)'$")
+//    public void User_Clicks_the_new_folder_name_as_Level_(int arg1) {
+//        folderpanelpage.selectfolder();
+//        Utils.sleep(5);
+//    }
+//
+//
+//    @Then("^User click the delete folder button$")
+//    public void User_click_the_delete_folder_button(){
+//        folderpanelpage.deletefolder();
+//        Utils.sleep(5);
+//        folderpanelpage.okdelfolder();
+//        Utils.sleep(5);
+//    }
+//
+//    @Then("^the new folder will be deleted$")
+//    public void the_new_folder_will_be_deleted() {
+//
+//
+
+
+    }
 
 
 
