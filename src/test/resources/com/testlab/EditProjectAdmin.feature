@@ -66,15 +66,15 @@ Feature: Super Admin can edit project admin
     Then '<Error Message>' should be displayed
    Examples:
     |fullname|Username|Password|Confirmpassword|Email|favouriteplace|Project|Error Message|
-    |Proname|Prro@@@|password1|password1|tester@gmail.com|London|2|Only alphanumeric characters are allowed|
-    |testfulname||Testpass1|Testpass1|testuser@example.com|london|2|Please enter all the mandatory fields|
-    |testfulname|Projectadmin1|Testpass1|Testpass2|testuser@example.com|london|2|Confirm password does not match the password|
-    |testfulname|Projectadmin1|test|test|testuser@example.com|london|2|Password should contains atleast 1 Capital letter and 1 Numeric|
-    |testfulname|Projectadmin1|Test123|Test123|test@example@ |london|2|Invalid Email Address|
-    |testfulname|Projectadmin1|Test123|Test123|test@example.com|london123|2|Only alphabates are allowed|
-    ||Projectadmin1|Testpass1|Testpass1|testuser@example.com|london|2|Please enter all the mandatory fields|
-    |testfulname|Projectadmin1|Testpass1|Testpass1||london|2|Please enter all the mandatory fields|
-    |testfulname|projectadmin1||Testpass1|testuser@example.com|london|2|Please enter all the mandatory fields|
+    |Proname|Prro@@@|password1|password1|tester@gmail.com|London|1|Only alphanumeric characters are allowed|
+    |testfulname||Testpass1|Testpass1|testuser@example.com|london|1|Please enter all the mandatory fields|
+    |testfulname|Projectadmin1|Testpass1|Testpass2|testuser@example.com|london|1|Confirm password does not match the password|
+    |testfulname|Projectadmin1|test|test|testuser@example.com|london|1|Password should contains atleast 1 Capital letter and 1 Numeric|
+    |testfulname|Projectadmin1|Test123|Test123|test@example@ |london|1|Invalid Email Address|
+    |testfulname|Projectadmin1|Test123|Test123|test@example.com|london123|1|Only alphabates are allowed|
+    ||Projectadmin1|Testpass1|Testpass1|testuser@example.com|london|1|Please enter all the mandatory fields|
+    |testfulname|Projectadmin1|Testpass1|Testpass1||london|1|Please enter all the mandatory fields|
+    |testfulname|projectadmin1||Testpass1|testuser@example.com|london|1|Please enter all the mandatory fields|
 
 
 

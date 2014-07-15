@@ -109,7 +109,7 @@ public class StepDefs {
     @Then("^Admin should login successfully$")
     public void Admin_should_login_successfully() {
 
-        Utils.sleep(5);
+        Utils.sleep(10);
         Assert.assertTrue(Utils.isElementPresent(By.linkText("Logout")));
     }
 
@@ -188,7 +188,7 @@ public class StepDefs {
     @When("^Admin enters an new Project  with valid 'Project name' and valid 'Project Desc'$")
     public void Admin_enters_an_new_Project_with_valid_Project_name_and_valid_Project_Desc() {
         Utils.sleep(5);
-        name = "Manual Testing" + new Random().nextInt(100);
+        name = "Manual Testing" + new Random().nextInt(1000);
         addProject.enterProjectname(name);
         addProject.enterProjectDesc("Manual Testing");
 
@@ -202,7 +202,7 @@ public class StepDefs {
 
     @Then("^Admin should see the message as 'Project saved successfully'$")
     public void Admin_should_see_the_message_as_Project_saved_successfully() {
-        Utils.sleep(20);
+        Utils.sleep(10);
         //Assert.assertTrue(Utils.isTextPresent("Project saved successfully"));
         Assert.assertEquals("Project saved successfully", driver.findElement(By.id("success_message")).getText());
 
@@ -401,7 +401,7 @@ public class StepDefs {
 
     @Then("^the success message is shown as dialog$")
     public void the_success_message_is_shown_as_dialog() {
-        Utils.sleep(20);
+        Utils.sleep(5);
         Assert.assertTrue(Utils.getVisibleText().contains("Tester details saved Successfully"));
     }
 
@@ -493,7 +493,7 @@ public class StepDefs {
 
     @Then("^User Should see the message dialog box 'Project Admin User details saved Successfully'$")
     public void User_Should_see_the_message_dialog_box_Project_Admin_User_details_saved_Successfully() {
-        Utils.sleep(20);
+        Utils.sleep(10);
         Assert.assertTrue(Utils.isElementPresent(By.xpath(".//*[@id='success_dialog']/div/div/div/button")));
     }
 
@@ -579,7 +579,7 @@ public class StepDefs {
 
     @Then("^Project Admin should login successfully$")
     public void Project_Admin_should_login_successfully() {
-         Utils.sleep(20);
+         Utils.sleep(5);
         Assert.assertTrue(Utils.isElementPresent(By.linkText("Logout")));
     }
 
@@ -876,7 +876,7 @@ public class StepDefs {
 
                @Then("^User Should see the message dialog box 'Project Admin details updated Successfully'$")
      public void User_Should_see_the_message_dialog_box_Project_Admin_details_updated_Successfully() {
-                   Utils.sleep(20);
+                   Utils.sleep(10);
                Assert.assertTrue(Utils.isTextPresent("Project Admin details updated Successfully"));
           }
 

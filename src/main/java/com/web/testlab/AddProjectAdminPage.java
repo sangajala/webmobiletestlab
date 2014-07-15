@@ -23,7 +23,8 @@ public class AddProjectAdminPage {
             driver.findElement(By.id("email")).sendKeys(email);
             driver.findElement(By.id("favplace")).clear();
             driver.findElement(By.id("favplace")).sendKeys(favplace);
-            Utils.sleep(5);
+
+           Utils.sleep(5);
             Select sel = new Select(driver.findElement(By.id("projectid")));
             sel.selectByIndex(projectindex);
            // Utils.selectFromDropDown(By.id("projectid"), project);
@@ -34,7 +35,7 @@ public class AddProjectAdminPage {
         public void saveProjectAdmins()
         {
             driver.findElement(By.xpath(".//*[@id='createprojectadmin']/div/button[2]")).click();
-            Utils.sleep(5);
+            Utils.sleep(10);
 
         }
 
@@ -57,5 +58,6 @@ public class AddProjectAdminPage {
         driver.findElement(By.xpath(".//*[@id='createprojectadmin']/div/button[1]")).click();
     }
 }
+
 
 
