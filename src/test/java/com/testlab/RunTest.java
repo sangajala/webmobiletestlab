@@ -1,13 +1,13 @@
 package com.testlab;
 
-import org.junit.runner.RunWith;
+        import org.junit.runner.RunWith;
 
-import cucumber.junit.Cucumber;
+        import cucumber.junit.Cucumber;
 
 @RunWith(Cucumber.class)
 @Cucumber.Options(
-format = {"html:target/cucumber"},
-tags = {})
+        format = {"html:target/cucumber"},
+        tags = {})
 public class RunTest{
 
 }

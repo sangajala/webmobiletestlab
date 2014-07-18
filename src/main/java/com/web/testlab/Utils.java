@@ -17,6 +17,7 @@ public class Utils
 		 }
     public static void selectFromDropDown1(By by, int index)
     {
+
         Select sel = new Select(driver.findElement(by));
         sel.selectByIndex(index);
 
@@ -69,7 +70,7 @@ public class Utils
 
     public static void sleep(int i) {
         try {
-            Thread.sleep(i*1000);
+            Thread.sleep(i*2000);
         } catch (InterruptedException e) {
                 e.printStackTrace();
         }
