@@ -42,6 +42,7 @@ public class StepDefs {
     static int index;
     static String username;
     static String adminpassword;
+    TesterRegisterPage testerregisterpage;
 
     @Before
     public void StartBrowser() throws MalformedURLException, InterruptedException {
@@ -67,6 +68,7 @@ public class StepDefs {
         editprojectadminpage = new EditProjectAdminPage();
         myaccount = new MyaccountPage();
         defectpage = new DefectPage();
+        testerregisterpage = new TesterRegisterPage();
 
         if (Utils.isElementPresent(By.linkText("Logout")))
             home.Logout();
@@ -493,7 +495,7 @@ public class StepDefs {
 
     @Then("^User Should see the message dialog box 'Project Admin User details saved Successfully'$")
     public void User_Should_see_the_message_dialog_box_Project_Admin_User_details_saved_Successfully() {
-        Utils.sleep(10);
+        Utils.sleep(5);
         Assert.assertTrue(Utils.isElementPresent(By.xpath(".//*[@id='success_dialog']/div/div/div/button")));
     }
 
@@ -1299,7 +1301,96 @@ public class StepDefs {
 //
 
 
+    @Given("^User is on Login Page$")
+    public void User_is_on_Login_Page() {
+        Assert.assertTrue(Utils.getVisibleText().contains("WEB LOGIN"));
+        Utils.sleep(3);
     }
+
+    @When("^User clicks on the 'Sign up' button$")
+    public void User_clicks_on_the_Sign_up_button(){
+        testerregisterpage.signUp();
+        // driver.findElement(By.xpath("/html/body/div[1]/div/form/div[2]/span/a[1]")).click();
+        Utils.sleep(3);
+    }
+
+    @Then("^User enters  in 'Registration form' Page$")
+    public void User_enters_in_Registration_form_Page(){
+    }
+
+    @When("^User enters '(.*)' as  fullname$")
+    public void User_enters_fullname(String fullname){
+        testerregisterpage.enterTesterFullname(fullname);
+        // driver.findElement(By.id("fulnme")).sendKeys(fullname);
+    }
+
+    @And("^User enters '(.*)' as a new username$")
+    public void User_enters_username(String username) {
+        username = username + String.valueOf(Math.abs(random.nextInt()));
+
+        testerregisterpage.enterTesterUsername(username);
+        //driver.findElement(By.id("usrnme")).sendKeys(username);
+    }
+
+    @And("^User enters '(.*)' as password$")
+    public void User_enters_Password(String password){
+        testerregisterpage.testerPassword(password);
+        //driver.findElement(By.id("pass")).sendKeys(password);
+    }
+
+    @And("^User  enters '(.*)' as confirm password$")
+    public void User_enters_confirm_password(String password){
+        testerregisterpage.testerConfirmPassword(password);
+        //  driver.findElement(By.id("cpass")).sendKeys(password);
+    }
+
+    @And("^User enters '(.*) as email$")
+    public void User_enters_example_com_as_email(String email){
+        testerregisterpage.testeremail(email);
+        // driver.findElement(By.id("email")).sendKeys(email);
+    }
+
+    @And("^User enters '(.*)' as a favourite Place$")
+    public void User_enters__a_favourite_Place(String favplace) {
+        testerregisterpage.testerFavouritePlace(favplace);
+        //driver.findElement(By.id("favplace")).sendKeys(favplace);
+
+    }
+
+    @And("^selects 'finance domain' as a community$")
+    public void selects_finance_domain_as_a_community(){
+        testerregisterpage.testerCommunity();
+        // driver.findElement(By.xpath("/html/body/div[2]/div/div/form/table/tbody/tr[8]/td[2]/select/option[2]")).click();
+    }
+
+    @Then("^User saves the form$")
+    public void User_saves_the_form() {
+        testerregisterpage.testerSaveButton();
+        //driver.findElement(By.xpath("/html/body/div[2]/div/div/form/div/button[1]")).click();
+        Utils.sleep(5);
+    }
+
+    @Then("^User can see the confirm message$")
+    public void User_can_see_the_confirm_message() {
+        testerregisterpage.confirmMessage();
+        //   driver.findElement(By.xpath("/html/body/div[3]/div/div/p"));
+        // Assert.assertTrue(Utils.isTextPresent("Tester registration is done Successfully"));
+        Utils.sleep(5);
+
+
+    }
+
+
+    @Then("^User clicks OK button to return login page$")
+    public void User_clicks_OK_button_to_return_login_page() {
+        testerregisterpage.okButton();
+        //driver.findElement(By.xpath("/html/body/div[3]/div/div/div/button")).click();
+        Utils.sleep(5);
+    }
+
+
+
+}
 
 
 
