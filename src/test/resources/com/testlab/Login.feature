@@ -1,4 +1,4 @@
-@login
+@login@srinu
 Feature: Admin can log into the portal
 #  As A Admin
 #  I want to Login

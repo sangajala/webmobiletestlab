@@ -1,11 +1,8 @@
-@EditProject
+@EditProject@ram
 Feature: Edit Project as Super Admin
 #As a Super Admin
 #I want see Edit Project button
 #So that I can edit Project
-
-
-
 
 
   Scenario: Admin can Edit the Project by clicking the 'Save' button in the 'Edit Project'

@@ -1,19 +1,19 @@
 package com.testlab;
 
-import java.net.MalformedURLException;
-import java.util.Random;
-
 import com.web.testlab.*;
-import cucumber.annotation.After;
-import cucumber.annotation.Before;
-import cucumber.annotation.en.And;
-import cucumber.annotation.en.Given;
-import cucumber.annotation.en.Then;
-import cucumber.annotation.en.When;
-import cucumber.runtime.PendingException;
+import cucumber.api.java.Before;
+import cucumber.api.java.en.And;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+import org.junit.After;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.Select;
+
+import java.net.MalformedURLException;
+import java.util.Random;
 
 public class StepDefs {
 
@@ -44,13 +44,8 @@ public class StepDefs {
 
     @Before
     public void StartBrowser() throws MalformedURLException, InterruptedException {
-        try {
-            BrowserFactory.StartBrowser("firefox", "http://tvishitech.com/webdev/testlab/web/index.php");
-            driver = BrowserFactory.driver;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
+        driver = BrowserFactory.driver;
         loginPage = new LoginPage();
         home = new HomePage();
         forgotpwdpage = new ForgotPwdPage();
@@ -74,7 +69,7 @@ public class StepDefs {
     @After
     public void closeBrowser() throws MalformedURLException, InterruptedException {
 
-        driver.quit();
+        //  driver.quit();
 
         //.QuitBrowser();
 
@@ -88,18 +83,20 @@ public class StepDefs {
     @When("^Admin enters '(.*)' as username$")
     public void Admin_enters_username(String username) {
 
+        driver.findElement(By.id("username")).clear();
         driver.findElement(By.id("username")).sendKeys(username);
     }
 
     @When("^Admin enters '(.*)' as password$")
     public void Admin_enters_Admin_as_password(String password) {
+        driver.findElement(By.name("password")).clear();
         driver.findElement(By.name("password")).sendKeys(password);
 
     }
 
     @When("^Admin clicks on 'login' button$")
     public void Admin_clicks_on_login_button() {
-
+        (new Select(driver.findElement(By.id("choosetype")))).selectByVisibleText("Projectadmin");
         driver.findElement(By.tagName("button")).click();
         Utils.sleep(5);
     }
@@ -323,7 +320,7 @@ public class StepDefs {
 
     @Then("^project admin is in project home page$")
     public void project_admin_is_in_project_home_page() {
-        Assert.assertTrue(Utils.isTextPresent("Hi, ProjectAdmin"));
+        Assert.assertTrue(Utils.isTextPresent("Hi, Project Admin"));
     }
 
     @When("^project admin open the tester module$")
@@ -457,9 +454,6 @@ public class StepDefs {
     }
 
 
-
-
-
     @Given("^User is on the 'Add Project Admin' Page logged in with '(.*)' as username and '(.*)' as password$")
     public void User_is_on_the_Add_Project_Admin_Page_logged_in_with_testlabadmin_as_username_and_Admin1_as_password(String uname, String pwd) {
         loginPage.login(uname, pwd);
@@ -565,15 +559,15 @@ public class StepDefs {
 
     @When("^Project Admin enter Username and Password created by super admin$")
     public void enter_Username_and_Password_created_by_super_admin() {
-        System.out.println(username+adminpassword);
-        loginPage.login(username,adminpassword);
+        System.out.println(username + adminpassword);
+        loginPage.login(username, adminpassword);
         Utils.sleep(5);
 
     }
 
     @Then("^Project Admin should login successfully$")
     public void Project_Admin_should_login_successfully() {
-         Utils.sleep(5);
+        Utils.sleep(5);
         Assert.assertTrue(Utils.isElementPresent(By.linkText("Logout")));
     }
 
@@ -594,8 +588,8 @@ public class StepDefs {
     }
 
     @Given("^Project Admin is in 'Test Case view panel' Page logged in as '(.*)' as username and '(.*)' as password$")
-    public void Project_Admin_is_in_Add_Test_Case_Page(String uname,String pwd) {
-        loginPage.login(uname,pwd);
+    public void Project_Admin_is_in_Add_Test_Case_Page(String uname, String pwd) {
+        loginPage.login(uname, pwd);
         Utils.sleep(5);
         home.navigateToTestCaseViewPanel();
     }
@@ -640,6 +634,9 @@ public class StepDefs {
 
     @And("^Testcases already added to the view panel$")
     public void Testcases_already_added_to_the_view_panel() {
+        driver.findElement(By.linkText("Test Cases")).click();
+        driver.findElement(By.linkText("Expand All")).click();
+        driver.findElement(By.id("255")).click();
         Assert.assertTrue(Utils.isElementPresent(By.cssSelector("img[title=\"Edit Testcase\"]")));
 
     }
@@ -680,13 +677,13 @@ public class StepDefs {
 
     @Given("^user is in projects page$")
     public void user_is_in_projects_page() {
-       loginPage.login("testlabadmin", "Admin1");
+        loginPage.login("testlabadmin", "Admin1");
         Utils.sleep(5);
     }
 
     @When("^click on delete option for selected project$")
-    public void click_on_delete_option_for_selected_project()  {
-      //driver.findElement(By.xpath("//*[@id=\"myTable\"]/tbody/tr[1]/td[4]/a[2]/img")).click();
+    public void click_on_delete_option_for_selected_project() {
+        //driver.findElement(By.xpath("//*[@id=\"myTable\"]/tbody/tr[1]/td[4]/a[2]/img")).click();
         projectspage.DeleteProject();
     }
 
@@ -718,16 +715,16 @@ public class StepDefs {
     public void click_on_delete_option_for_selected_tester() {
 
         testers.DeleteTester();
-            }
+    }
 
     @Then("^selected Tester should be deleted from the list$")
-    public void selected_Tester_should_be_deleted_from_the_list(){
+    public void selected_Tester_should_be_deleted_from_the_list() {
 
 
     }
 
     @When("^click on cancel button$")
-    public void click_on_cancel_button()  {
+    public void click_on_cancel_button() {
         driver.findElement(By.xpath("//*[@id=\"delete_dialog\"]/div/div/form/div/button[2]")).click();
 
 
@@ -741,8 +738,8 @@ public class StepDefs {
     }
 
     @And("^click on Edit option for selected project$")
-    public void click_on_Edit_option_for_selected_project()  {
-      projectspage.EditProject();
+    public void click_on_Edit_option_for_selected_project() {
+        projectspage.EditProject();
         Utils.sleep(5);
     }
 
@@ -765,216 +762,219 @@ public class StepDefs {
         name = "Latest";
         addProject.enterProjectname(name);
     }
+
     @Given("^Project Admin is in 'Test Case view panel' Page logged in as '(.*)' as username and '(.*)' as Password$")
-       public void Project_Admin_is_in_Test_Case_view_panel_Page_logged_in_as_projectadmin_as_username_and_Admin_as_Password(String uname,String Pwd)
-        {
-                loginPage.login(uname,Pwd);
-                Utils.sleep(5);
-                home.navigatetotestcasepage();
-                Assert.assertTrue(Utils.isTextPresent("Test Cases"));
-                Utils.sleep(5);
+    public void Project_Admin_is_in_Test_Case_view_panel_Page_logged_in_as_projectadmin_as_username_and_Admin_as_Password(String uname, String Pwd) {
+        loginPage.login(uname, Pwd);
+        Utils.sleep(5);
+        home.navigatetotestcasepage();
+        Assert.assertTrue(Utils.isTextPresent("Test Cases"));
+        Utils.sleep(5);
 
-          }
+    }
 
-       @When("^User clicks button to add a new folder$")
-       public void User_clicks_button_to_add_a_new_folder() {
-            folderpanelpage.clickaddfolder();
-           Utils.sleep(5);
-      }
+    @When("^User clicks button to add a new folder$")
+    public void User_clicks_button_to_add_a_new_folder() {
+        folderpanelpage.clickaddfolder();
+        Utils.sleep(5);
+    }
 
-     @Then("^User can see the Add Folder popup window$")
-        public void User_can_see_the_Add_Folder_popup_window(){
-       Assert.assertTrue(Utils.isTextPresent("Add Folder"));
-   }
+    @Then("^User can see the Add Folder popup window$")
+    public void User_can_see_the_Add_Folder_popup_window() {
+        Assert.assertTrue(Utils.isTextPresent("Add Folder"));
+    }
 
     @When("^User enters the folder name as '(.*)'$")
     public void User_enters_the_folder_name_as_Level_(String foldername) {
         fname = foldername + new Random().nextInt(100);
-                folderpanelpage.enterfoldername(fname);
+        folderpanelpage.enterfoldername(fname);
 
     }
 
-      @And("^clicks save button$")
-      public void clicks_save_button() {
-           folderpanelpage.clicksave();
-            Utils.sleep(5);
-     }
+    @And("^clicks save button$")
+    public void clicks_save_button() {
+        folderpanelpage.clicksave();
+        Utils.sleep(5);
+    }
 
-     @Then("^User can see the folder in the folder panel$")
-       public void User_can_see_the_folder_in_the_folder_panel() {
-            Assert.assertTrue(Utils.isTextPresent(fname));
-       }
-  /*  @And("^Admin edit Project with valid 'Project description'$")
-    public void Admin_edit_Project_with_valid_Project_description() {
-       addProject.enterProjectDesc("Edit project Description");
-    }*/
+    @Then("^User can see the folder in the folder panel$")
+    public void User_can_see_the_folder_in_the_folder_panel() {
+        Assert.assertTrue(Utils.isTextPresent(fname));
+    }
+
+    /*  @And("^Admin edit Project with valid 'Project description'$")
+      public void Admin_edit_Project_with_valid_Project_description() {
+         addProject.enterProjectDesc("Edit project Description");
+      }*/
     @Given("^User is in project Admins page$")
-     public void User_is_in_project_Admins_page() {
-              loginPage.login("testlabadmin","Admin1");
-              Utils.sleep(5);
-              home.NavigateProjectAdminspage();
+    public void User_is_in_project_Admins_page() {
+        loginPage.login("testlabadmin", "Admin1");
+        Utils.sleep(5);
+        home.NavigateProjectAdminspage();
 
-                 }
+    }
 
-             @And("^Click on Edit Project Admin link for the first user$")
-       public void Click_on_Edit_Project_Admin_link_for_the_first_user() {
-                driver.findElement(By.xpath("//*[@id=\"myTable\"]/tbody/tr[1]/td[5]/a[1]/img")).click();
-                Utils.sleep(5);
-           }
+    @And("^Click on Edit Project Admin link for the first user$")
+    public void Click_on_Edit_Project_Admin_link_for_the_first_user() {
+        driver.findElement(By.xpath("//*[@id=\"myTable\"]/tbody/tr[1]/td[5]/a[1]/img")).click();
+        Utils.sleep(5);
+    }
 
-               @When("^edit the '(.*)' as Fullname$")
-        public void edit_the_Project_admin_as_Fullname(String fullname) {
-             editprojectadminpage.Editfullname(fullname);
+    @When("^edit the '(.*)' as Fullname$")
+    public void edit_the_Project_admin_as_Fullname(String fullname) {
+        editprojectadminpage.Editfullname(fullname);
 
-                   }
+    }
 
-              @And("^edit the '(.*)' as new UserName$")
-        public void edit_the_Proadmin_as_new_UserName(String uname)  {
-               uname = uname + String.valueOf(Math.abs(random.nextInt()));
-                editprojectadminpage.EdituserName(uname);
-           }
+    @And("^edit the '(.*)' as new UserName$")
+    public void edit_the_Proadmin_as_new_UserName(String uname) {
+        uname = uname + String.valueOf(Math.abs(random.nextInt()));
+        editprojectadminpage.EdituserName(uname);
+    }
 
-               @And("^edit the '(.*)' as Password$")
-      public void edit_the_Password_as_Password(String pwd) {
-                editprojectadminpage.EditPassword(pwd);
-           }
+    @And("^edit the '(.*)' as Password$")
+    public void edit_the_Password_as_Password(String pwd) {
+        editprojectadminpage.EditPassword(pwd);
+    }
 
-              @And("^edit the '(.*)' as Confirm Password$")
-       public void edit_the_Password_as_Confirm_Password(String pwd)  {
-                editprojectadminpage.EditConfirmPassword(pwd);
-           }
+    @And("^edit the '(.*)' as Confirm Password$")
+    public void edit_the_Password_as_Confirm_Password(String pwd) {
+        editprojectadminpage.EditConfirmPassword(pwd);
+    }
 
-                @And("^edit the '(.*)' as Email$")
-        public void edit_the_Example_test_com_as_Email(String Email)  {
-                editprojectadminpage.EditEmail(Email);
-           }
+    @And("^edit the '(.*)' as Email$")
+    public void edit_the_Example_test_com_as_Email(String Email) {
+        editprojectadminpage.EditEmail(Email);
+    }
 
-               @And("^edit the '(.*)' as FavouritePlace$")
-       public void edit_the_London_as_FavouritePlace(String favplace) {
-              editprojectadminpage.EditFavouriteplace(favplace);
-           }
+    @And("^edit the '(.*)' as FavouritePlace$")
+    public void edit_the_London_as_FavouritePlace(String favplace) {
+        editprojectadminpage.EditFavouriteplace(favplace);
+    }
 
-              @And("^select the project$")
-      public void edit_the_Manual_testing_as_project() {
-              editprojectadminpage.Editproject(2);
+    @And("^select the project$")
+    public void edit_the_Manual_testing_as_project() {
+        editprojectadminpage.Editproject(2);
 
-              Utils.sleep(5);
-           }
+        Utils.sleep(5);
+    }
 
-              @And("^user can view updated details for Project Admin$")
-        public void user_can_view_updated_details_for_Project_Admin() {
-               Utils.sleep(5);
-               // Assert.assertFalse(Utils.isTextPresent(uname));
-                      Assert.assertTrue(Utils.getVisibleText().contains("Project admin"));
-        }
+    @And("^user can view updated details for Project Admin$")
+    public void user_can_view_updated_details_for_Project_Admin() {
+        Utils.sleep(5);
+        // Assert.assertFalse(Utils.isTextPresent(uname));
+        Assert.assertTrue(Utils.getVisibleText().contains("Project admin"));
+    }
 
-               @Then("^User Should see the message dialog box 'Project Admin details updated Successfully'$")
-     public void User_Should_see_the_message_dialog_box_Project_Admin_details_updated_Successfully() throws Throwable {
-               Assert.assertTrue(Utils.isTextPresent("Project Admin details updated Successfully"));
-          }
+    @Then("^User Should see the message dialog box 'Project Admin details updated Successfully'$")
+    public void User_Should_see_the_message_dialog_box_Project_Admin_details_updated_Successfully() throws Throwable {
+        Assert.assertTrue(Utils.isTextPresent("Project Admin details updated Successfully"));
+    }
 
-              @And("^User is in project Admins list page$")
-     public void User_is_in_project_Admins_list_page() {
-                Assert.assertTrue(Utils.isTextPresent("Assigned Project"));
-          }
+    @And("^User is in project Admins list page$")
+    public void User_is_in_project_Admins_list_page() {
+        Assert.assertTrue(Utils.isTextPresent("Assigned Project"));
+    }
 
-               @When("^User edits '(.*)','(.*)','(.*)','(.*)','(.*)','(.*)','(\\d+)' as invalid details for project Admin$")
-     public void User_edits_fullname_Username_Password_Confirmpassword_Email_favouriteplace_as_invalid_details_for_project_Admin(String fullname, String Username, String pswd, String Cpswd, String Email, String favplace,int projectindex) {
-
-
-                   editprojectadminpage.editProjectAdmins(fullname,Username,pswd,Cpswd,Email,favplace,projectindex);
-           }
-
-                @Given("^User is in 'Project Settings' page$")
-        public void User_is_in_Project_Settings_page() {
-                loginPage.login("projectadmin", "Admin1");
-                Utils.sleep(5);
-                home.navigateToProjectSettings();
-               Utils.sleep(5);
-              }
-
-                @When("^User selects 'Hold test case execution' button$")
-        public void User_selects_Hold_test_case_execution_button() {
-                projectsettings.HoldTestCase();
-           }
-
-              @Then("^User sees the message dialogue box 'Do you really want to Hold Testcase execution ' with 'Ok' and 'Cancel' button$")
-       public void User_sees_the_message_dialogue_box_Do_you_really_want_to_Hold_Testcase_execution_with_Ok_and_Cancel_button() {
-                Assert.assertTrue(Utils.isTextPresent("Do you really want to Hold Testcase Execution ?"));
-          }
-
-                @When("^User selects 'Ok'$")
-      public void User_selects_Ok()  {
-              projectsettings.ClickOk();
-           }
-
-               @Then("^User sees the 'hold test case execution' button changed to 'unhold test case execution'$")
-     public void User_sees_the_hold_test_case_execution_button_changed_to_unhold_test_case_execution()  {
-             Assert.assertTrue(Utils.isTextPresent("UnHold Testcase Execution"));
-
-                  }
-
-               @Then("^All the active testcases becomes inactive$")
-      public void All_the_active_testcases_becomes_inactive()  {
-               Utils.sleep(5);
-               home.navigateToReports();
-                Utils.sleep(5);
-                Assert.assertTrue(Utils.isTextPresent("No testcases yet for this project."));
-           }
+    @When("^User edits '(.*)','(.*)','(.*)','(.*)','(.*)','(.*)','(\\d+)' as invalid details for project Admin$")
+    public void User_edits_fullname_Username_Password_Confirmpassword_Email_favouriteplace_as_invalid_details_for_project_Admin(String fullname, String Username, String pswd, String Cpswd, String Email, String favplace, int projectindex) {
 
 
-              @When("^User selects 'Unhold test case execution' button$")
-     public void User_selects_Unhold_test_case_execution_button() {
-                home.navigateToProjectSettings();
-                Utils.sleep(5);
-                projectsettings.UnHoldTestCase();
-                         }
+        editprojectadminpage.editProjectAdmins(fullname, Username, pswd, Cpswd, Email, favplace, projectindex);
+    }
 
-              @Then("^User sees the message dialogue box 'Do you really want to UnHold Testcase execution ' with 'Ok' and 'Cancel' button$")
-     public void User_sees_the_message_dialogue_box_Do_you_really_want_to_UnHold_Testcase_execution_with_Ok_and_Cancel_button() {
-                Assert.assertTrue(Utils.isTextPresent("Do you want to UnHold Testcase Execution ?"));
-          }
+    @Given("^User is in 'Project Settings' page$")
+    public void User_is_in_Project_Settings_page() {
+        loginPage.login("projectadmin", "Admin1");
+        Utils.sleep(5);
+        home.navigateToProjectSettings();
+        Utils.sleep(5);
+    }
 
-          @Then("^User sees the 'unhold test case execution' button changed to 'hold test case execution'$")
-     public void User_sees_the_unhold_test_case_execution_button_changed_to_hold_test_case_execution() {
-                Assert.assertTrue(Utils.isTextPresent("Hold Testcase Execution"));
-          }
+    @When("^User selects 'Hold test case execution' button$")
+    public void User_selects_Hold_test_case_execution_button() {
+        projectsettings.HoldTestCase();
+    }
 
-                @Then("^All the holded testcases are now unholded i.e made active$")
-     public void All_the_holded_testcases_are_now_unholded_i_e_made_active() {
-                    home.navigateToReports();
-                    Utils.sleep(5);
-                    Assert.assertFalse(Utils.isTextPresent("No testcases yet for this project."));
-                }
-                    @When("^User selects 'Ok' for Unhold$")
-                    public void User_selects_Ok_for_Unhold () {
-                        projectsettings.UnholdClickOk();
-                    }
+    @Then("^User sees the message dialogue box 'Do you really want to Hold Testcase execution ' with 'Ok' and 'Cancel' button$")
+    public void User_sees_the_message_dialogue_box_Do_you_really_want_to_Hold_Testcase_execution_with_Ok_and_Cancel_button() {
+        Assert.assertTrue(Utils.isTextPresent("Do you really want to Hold Testcase Execution ?"));
+    }
+
+    @When("^User selects 'Ok'$")
+    public void User_selects_Ok() {
+        projectsettings.ClickOk();
+    }
+
+    @Then("^User sees the 'hold test case execution' button changed to 'unhold test case execution'$")
+    public void User_sees_the_hold_test_case_execution_button_changed_to_unhold_test_case_execution() {
+        Assert.assertTrue(Utils.isTextPresent("UnHold Testcase Execution"));
+
+    }
+
+    @Then("^All the active testcases becomes inactive$")
+    public void All_the_active_testcases_becomes_inactive() {
+        Utils.sleep(5);
+        home.navigateToReports();
+        Utils.sleep(5);
+        Assert.assertTrue(Utils.isTextPresent("No testcases yet for this project."));
+    }
+
+
+    @When("^User selects 'Unhold test case execution' button$")
+    public void User_selects_Unhold_test_case_execution_button() {
+        home.navigateToProjectSettings();
+        Utils.sleep(5);
+        projectsettings.UnHoldTestCase();
+    }
+
+    @Then("^User sees the message dialogue box 'Do you really want to UnHold Testcase execution ' with 'Ok' and 'Cancel' button$")
+    public void User_sees_the_message_dialogue_box_Do_you_really_want_to_UnHold_Testcase_execution_with_Ok_and_Cancel_button() {
+        Assert.assertTrue(Utils.isTextPresent("Do you want to UnHold Testcase Execution ?"));
+    }
+
+    @Then("^User sees the 'unhold test case execution' button changed to 'hold test case execution'$")
+    public void User_sees_the_unhold_test_case_execution_button_changed_to_hold_test_case_execution() {
+        Assert.assertTrue(Utils.isTextPresent("Hold Testcase Execution"));
+    }
+
+    @Then("^All the holded testcases are now unholded i.e made active$")
+    public void All_the_holded_testcases_are_now_unholded_i_e_made_active() {
+        home.navigateToReports();
+        Utils.sleep(5);
+        Assert.assertFalse(Utils.isTextPresent("No testcases yet for this project."));
+    }
+
+    @When("^User selects 'Ok' for Unhold$")
+    public void User_selects_Ok_for_Unhold() {
+        projectsettings.UnholdClickOk();
+    }
 
     @When("^Admin Enters '(.*)' as username$")
-    public void Admin_Enters_testlabadmin_as_username(String uname){
+    public void Admin_Enters_testlabadmin_as_username(String uname) {
         forgotpwdpage.enterusername(uname);
     }
+
     @Given("^Super Admin is in 'My Accounts' Page logged in as '(.*)' as username and '(.*)' as password$")
-    public void Super_Admin_is_in_My_Accounts_Page_logged_in_as_testlabadmin_as_username_and_Admin_as_password(String uname,String pwd){
-        loginPage.login(uname,pwd);
+    public void Super_Admin_is_in_My_Accounts_Page_logged_in_as_testlabadmin_as_username_and_Admin_as_password(String uname, String pwd) {
+        loginPage.login(uname, pwd);
         Utils.sleep(5);
         home.navigatetoaccountdetails();
         Utils.sleep(5);
     }
 
     @When("^edit the full name as '(.*)'$")
-    public void edit_the_full_name_as_Superadmin_(String fullname)  {
+    public void edit_the_full_name_as_Superadmin_(String fullname) {
         myaccount.editfullname(fullname);
     }
 
     @And("^edit the username as '(.*)'$")
-    public void edit_the_username_as_Testlabadmin_(String uname)  {
+    public void edit_the_username_as_Testlabadmin_(String uname) {
         myaccount.edituname(uname);
     }
 
     @And("^edit the password as '(.*)'$")
-    public void edit_the_password_as_Admin_(String pwd)  {
+    public void edit_the_password_as_Admin_(String pwd) {
         myaccount.editpwd(pwd);
     }
 
@@ -1000,7 +1000,7 @@ public class StepDefs {
     }
 
     @Then("^can see the success message dialog box as 'Profile is updated successfully'$")
-    public void can_see_the_success_message_dialog_box_as_Profile_is_updated_successfully()  {
+    public void can_see_the_success_message_dialog_box_as_Profile_is_updated_successfully() {
         Assert.assertTrue(Utils.isTextPresent("Profile is updated Successfully"));
     }
 
@@ -1010,13 +1010,13 @@ public class StepDefs {
     }
 
     @Then("^ user is in same  page with updated details$")
-    public void _user_is_in_same_page_with_updated_details(){
+    public void _user_is_in_same_page_with_updated_details() {
         Assert.assertTrue(Utils.isTextPresent("My Account"));
 
     }
 
     @Then("^the message '(.*)'$")
-    public void the_message_ErrorMessage_(String error){
+    public void the_message_ErrorMessage_(String error) {
         Assert.assertTrue(Utils.getVisibleText().contains(error));
     }
 
@@ -1027,7 +1027,7 @@ public class StepDefs {
     }
 
     @When("^Super admin edits '(.*)','(.*)','(.*)','(.*)','(.*)','(.*)' as invalid details$")
-    public void Super_admin_edits_fullname_username_Password_ConfPassword_email_favplace_as_invalid_details(String fname,String uname,String pwd,String confpwd,String email,String favplace){
+    public void Super_admin_edits_fullname_username_Password_ConfPassword_email_favplace_as_invalid_details(String fname, String uname, String pwd, String confpwd, String email, String favplace) {
         myaccount.editfullname(fname);
         myaccount.edituname(uname);
         myaccount.editpwd(pwd);
@@ -1035,7 +1035,6 @@ public class StepDefs {
         myaccount.editemail(email);
         myaccount.editfavplace(favplace);
     }
-
 
 
     @Then("^can see '(.*)' displayed$")
@@ -1047,29 +1046,29 @@ public class StepDefs {
     }
 
     @Given("^Project Admin is in 'Test Case view panel' logged in  as '(.*)' as username and '(.*)' as password$")
-    public void Project_Admin_is_in_Test_Case_view_panel_logged_in_as_projectadmin_as_username_and_Admin_as_password(String uname,String pwd){
-        loginPage.login(uname,pwd);
+    public void Project_Admin_is_in_Test_Case_view_panel_logged_in_as_projectadmin_as_username_and_Admin_as_password(String uname, String pwd) {
+        loginPage.login(uname, pwd);
         Utils.sleep(5);
 
     }
 
     @When("^the User enters '(.*)','(.*)','(.*)','(.*)','(.*)','(.*)','(\\d+)' as fields$")
-    public void the_User_enters_the_Valid_data_in_all_the_fields_tester_test_Testpass_Testpass_test_example_com_london_(String fname,String uname,String pwd,String confpwd,String email,String favplace,int projectindex) throws Throwable {
+    public void the_User_enters_the_Valid_data_in_all_the_fields_tester_test_Testpass_Testpass_test_example_com_london_(String fname, String uname, String pwd, String confpwd, String email, String favplace, int projectindex) throws Throwable {
 
-        if (uname.isEmpty() ) {
+        if (uname.isEmpty()) {
             System.out.println(uname);
             username = "";
+        } else {
+            username = uname + new Random().nextInt(100);
         }
-        else{
-          username = uname + new Random().nextInt(100);}
-       adminpassword = pwd;
+        adminpassword = pwd;
         fullname = fname;
         addprojectadminpage.enterProjectAdmins(fname, username, adminpassword, confpwd, email, favplace, projectindex);
     }
 
     @And("^Project Admin is back in testers page$")
     public void Project_Admin_is_back_in_testers_page() {
-    Utils.isTextPresent("Testers");
+        Utils.isTextPresent("Testers");
     }
 }
 

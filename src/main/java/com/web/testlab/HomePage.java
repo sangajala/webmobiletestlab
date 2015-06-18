@@ -32,7 +32,7 @@ public class HomePage {
 
     public void navigateToAddProjectAdminUser()
     {
-        driver.findElement(By.xpath("/html/body/nav/ul/li[2]/a")).click();
+        driver.findElement(By.linkText("Project Admins")).click();
         Utils.sleep(5);
         driver.findElement((By.linkText("Add project admin"))).click();
         Utils.sleep(5);

@@ -1,5 +1,6 @@
 package com.web.testlab;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -53,7 +54,7 @@ public abstract class BrowserFactory
 protected static WebDriver startRemoteWebBrowser(String browser,String URL)
 {
 
-    if(true)
+    if(false)
     {
         try
         {
@@ -62,8 +63,9 @@ protected static WebDriver startRemoteWebBrowser(String browser,String URL)
             //  driver=new ChromeDriver();
         	System.out.println("grid started...");
         	DesiredCapabilities capabilities = DesiredCapabilities.firefox();
+            capabilities.setCapability("browser", System.getProperty("browser"));
         	capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
-        	//capabilities.setCapability("platform", "Windows XP");
+        	capabilities.setCapability("platform", Platform.VISTA);
         	//capabilities.setCapability("version", "33");
 			/*DesiredCapabilities capabilities = DesiredCapabilities.firefox();
 			capabilities.setCapability("version", "17");

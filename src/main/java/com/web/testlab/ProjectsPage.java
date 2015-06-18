@@ -8,11 +8,11 @@ public class ProjectsPage {
     WebDriver driver = BrowserFactory.getDriver();
 
     public void EditProject() {
-        driver.findElement(By.xpath("//*[@id=\"myTable\"]/tbody/tr[1]/td[4]/a[1]/img")).click();
+        driver.findElement(By.xpath("(//img[@title='Edit Project'])[1]")).click();
     }
 
     public void DeleteProject() {
-        driver.findElement(By.xpath("//*[@id=\"myTable\"]/tbody/tr[1]/td[4]/a[2]/img")).click();
+        driver.findElement(By.xpath("(//img[@title='Delete Project'])[1]")).click();
     }
 
 

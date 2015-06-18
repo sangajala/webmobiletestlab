@@ -1,4 +1,4 @@
-@EditProjectAdmin
+@issues@EditProjectAdmin@srinu
 
 Feature: Super Admin can edit project admin
 

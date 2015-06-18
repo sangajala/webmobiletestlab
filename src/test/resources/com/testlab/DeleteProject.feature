@@ -8,7 +8,7 @@ Feature: Delete Project
 #    And selects the project he want to delete
 #    When user clicks on delete button
 #    Then User gets dialogue box “All Project Admins, Testers, Folders, Testcases and whole data related this Project will be deleted” with “Ok” and “Cancel” buttons.
-
+@issues
   Scenario: Super admin can delete the project
     Given user is in projects page
     When click on delete option for selected project
