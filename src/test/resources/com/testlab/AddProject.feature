@@ -17,10 +17,18 @@ Then Admin should navigate to the 'Add Project' Page
  Scenario: Admin can save the Project by clicking the 'Save' button in the 'Add Project'
  Given Admin is on the 'Add Project' Page
  When Admin enters an new Project  with valid 'Project name' and valid 'Project Desc'
- And Admin should click on 'Save' button
- Then Admin should see the message as 'Project saved successfully'
- When Admin clicks on 'Ok' button
- Then Admin should see the 'Home Page' with the new project added in the 'Projects Tab'
+   And Admin should click on 'Save' button
+   Then Admin should see the message as 'Project saved successfully'
+   When Admin clicks on 'Ok' button
+   Then Admin should see the 'Home Page' with the new project added in the 'Projects Tab'
+
+  Scenario: Admin can save the Project by clicking the 'Save' button in the 'Add Project'
+    Given Admin is on the 'Add Project' Page
+    When Admin enters an new Project  with valid 'Project name' and valid 'Project Desc'
+    And Admin should click on 'Save' button
+    Then Admin should see the message as 'Project saved successfully'
+    When Admin clicks on 'Ok' button
+    Then Admin should see the 'Home Page' with the new project added in the 'Projects Tab'
 
 Scenario:Admin cannot save the already existing project
 Given Admin is on the 'Add Project' Page
