@@ -1070,6 +1070,33 @@ public class StepDefs {
     public void Project_Admin_is_back_in_testers_page() {
         Utils.isTextPresent("Testers");
     }
+
+
+
+    @Given("^I logged in as Admin$")
+    public void i_logged_in_as_Admin() throws Throwable {
+
+        loginPage.login("testlabadmin", "Admin1");
+    }
+
+    @Given("^I navigate to my account page$")
+    public void i_navigate_to_my_account_page() throws Throwable {
+
+        projecthomepage.gotoAddProject();
+    }
+
+    @When("^I go back to my previous page$")
+    public void i_go_back_to_my_previous_page() throws Throwable {
+
+        projecthomepage.gotobackPage();
+    }
+
+    @Then("^I should go back to my main page$")
+    public void i_should_go_back_to_my_main_page() throws Throwable {
+
+        Assert.assertTrue("Checking user is in home page",projecthomepage.checkUserIsInHomePage());
+
+    }
 }
 
 

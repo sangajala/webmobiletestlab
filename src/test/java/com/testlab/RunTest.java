@@ -10,8 +10,9 @@ import org.openqa.selenium.WebDriver;
 @RunWith(Cucumber.class)
 @Cucumber.Options(
 format = {"html:target/cucumber","json:target/cucumber-report.json"},
-tags = {"@ram"})
+tags = {"@chandrika"})
 public class RunTest{
+
 
     static WebDriver driver;
     @BeforeClass
@@ -25,6 +26,7 @@ public class RunTest{
         }
 
     }
+
 
     @AfterClass
     public static void stop()
