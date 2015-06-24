@@ -36,3 +36,11 @@ When Admin enters an existing project name in the 'Project Name' textbox
 And Admin enters valid description in the 'Project Desc' textbox
 And Admin should click on 'Save' button
 Then Admin should see an error message as 'Project already exist.'
+
+Scenario:user can go back to main screen when he clicks back button
+
+Given as a user i am on page2
+And i should see a back button to go back to my main page
+When i click on the back button
+Then i shouldgo back to my main page
+And i should see any changes if i made
