@@ -39,5 +39,10 @@ Feature: Admin can log into the portal
     |Admin||Please enter valid password|
 
 
+    Scenario: Test
+
+      Given Test step
+
+
 
 
