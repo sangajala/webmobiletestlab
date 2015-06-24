@@ -42,6 +42,7 @@ Feature: Admin can log into the portal
     Scenario: Test
 
       Given Test step
+      When Test
 
 
 
