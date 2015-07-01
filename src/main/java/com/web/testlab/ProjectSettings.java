@@ -7,7 +7,7 @@ public class ProjectSettings {
     WebDriver driver = BrowserFactory.getDriver();
 
     public void HoldTestCase(){
-        driver.findElement(By.linkText("Hold Testcase Execution")).click();
+        driver.findElement(By.xpath("//button[contains(text(),'Testcase Execution')]")).click();
     }
 
     public void ClickOk() {
@@ -20,7 +20,7 @@ public class ProjectSettings {
 
     }
     public void UnHoldTestCase(){
-        driver.findElement(By.linkText("UnHold Testcase Execution")).click();
+        driver.findElement(By.xpath("//button[contains(text(),'Testcase Execution')]")).click();
     }
 
     public void UnholdClickOk() {

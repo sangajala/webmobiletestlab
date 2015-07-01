@@ -1097,6 +1097,32 @@ public class StepDefs {
         Assert.assertTrue("Checking user is in home page",projecthomepage.checkUserIsInHomePage());
 
     }
+
+    @When("^I add a Project admin with \"(.*?)\" , \"(.*?)\", \"(.*?)\", \"(.*?)\",\"(.*?)\",\"(.*?)\",\"(.*?)\" and active status as \"(.*?)\"$")
+    public void i_add_a_Project_admin_with_and_active_status_as(String arg1, String arg2, String arg3, String arg4, String arg5, String arg6, String arg7, String arg8) throws Throwable {
+
+    }
+
+    @Then("^the Project Admin should be saved with a message \"(.*?)\"$")
+    public void the_Project_Admin_should_be_saved_with_a_message(String arg1) throws Throwable {
+
+        System.out.println(arg1);
+    }
+
+    @Then("^the created project should be in top of the list with \"(.*?)\", \"(.*?)\", \"(.*?)\", \"(.*?)\"$")
+    public void the_created_project_should_be_in_top_of_the_list_with(String arg1, String arg2, String arg3, String arg4) throws Throwable {
+
+    }
+
+    @When("^I delete the created project$")
+    public void i_delete_the_created_project() throws Throwable {
+
+    }
+
+    @Then("^the project should be deleted successfully$")
+    public void the_project_should_be_deleted_successfully() throws Throwable {
+
+    }
 }
 
 
